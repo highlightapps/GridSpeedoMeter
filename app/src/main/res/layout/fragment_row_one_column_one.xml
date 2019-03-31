@@ -3,19 +3,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.github.anastr.speedviewlib.SpeedView
-        android:id="@+id/speedView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <com.example.viewpagerpoc.steering.SteeringView
+        android:id="@+id/steeringView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_centerInParent="true" />
 
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:max="180"
+        android:layout_margin="10dp" />
 
     <TextView
         android:id="@+id/pageTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="1"
         android:layout_centerHorizontal="true"
+        android:text="1"
         android:textColor="#FF0000"
         android:textSize="40sp" />
 </RelativeLayout>
