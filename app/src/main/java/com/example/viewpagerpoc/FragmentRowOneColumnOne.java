@@ -12,6 +12,7 @@ public class FragmentRowOneColumnOne extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        
         View view = inflater.inflate(R.layout.fragment_row_one_column_one, null);
         return view;
     }
