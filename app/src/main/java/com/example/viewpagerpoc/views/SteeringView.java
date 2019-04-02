@@ -1,4 +1,4 @@
-package com.example.viewpagerpoc.steering;
+package com.example.viewpagerpoc.views;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -46,6 +46,7 @@ public class SteeringView extends View {
 
     public void setSteeringAngle(float steeringAngle) {
         this.steeringAngle = steeringAngle;
+        postInvalidate();
     }
 
     /**

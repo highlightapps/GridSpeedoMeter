@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.example.viewpagerpoc.steering.SteeringView
+    <com.example.viewpagerpoc.views.SteeringView
         android:id="@+id/steeringView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -14,7 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:max="180"
         android:layout_margin="10dp" />
 
     <TextView
