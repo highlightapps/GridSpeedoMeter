@@ -108,12 +108,4 @@ public class CompassView extends View {
 
         drawing.set(false);
     }
-
-    private void drawCompassModes(Canvas canvas, int parentX, int parentY,
-                                  int bitmapX, int canvasWidth, int canvasHeight) {
-        paintTransperent.setColor(getResources().getColor(R.color.semiTransparent));
-        canvas.drawCircle(parentX, parentY, bitmapX - bitmapX / 15, paintTransperent);
-
-    }
-
 }
