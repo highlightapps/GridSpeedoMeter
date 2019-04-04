@@ -30,11 +30,11 @@ public class FragPageAdapter extends FragmentPagerAdapter {
 
     private Fragment getColumnOneFragment(int position) {
         switch (position) {
-            case 0:
-                return new FragmentRowOneColumnOne();
-            case 1:
+            case 0: // row 1
+                return new SteeringWidgetFragment();
+            case 1: // row 2
                 return new FragmentRowTwoColumnOne();
-            case 2:
+            case 2: // row 3
                 return new FragmentRowThreeColumnOne();
         }
         return null;
@@ -42,11 +42,11 @@ public class FragPageAdapter extends FragmentPagerAdapter {
 
     private Fragment getColumnTwoFragment(int position) {
         switch (position) {
-            case 0:
-                return new FragmentRowOneColumnTwo();
-            case 1:
+            case 0: // row 1
+                return new TyrePressureWidgetFragment();
+            case 1: // row 2
                 return new FragmentRowTwoColumnTwo();
-            case 2:
+            case 2: // row 3
                 return new FragmentRowThreeColumnTwo();
         }
         return null;
@@ -54,11 +54,11 @@ public class FragPageAdapter extends FragmentPagerAdapter {
 
     private Fragment getColumnThreeFragment(int position) {
         switch (position) {
-            case 0:
-                return new FragmentRowOneColumnThree();
-            case 1:
+            case 0: // row 1
+                return new CompassWidgetFragment();
+            case 1: // row 2
                 return new FragmentRowTwoColumnThree();
-            case 2:
+            case 2: // row 3
                 return new FragmentRowThreeColumnThree();
         }
         return null;

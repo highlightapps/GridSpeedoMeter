@@ -1,7 +1,6 @@
 package com.example.viewpagerpoc;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.hardware.GeomagneticField;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -19,7 +18,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.TextView;
 
 import com.example.viewpagerpoc.views.CompassView;
@@ -28,13 +26,12 @@ import com.example.viewpagerpoc.views.GlobalData;
 import static android.content.ContentValues.TAG;
 import static android.content.Context.SENSOR_SERVICE;
 
-import com.example.viewpagerpoc.R;
 import com.example.viewpagerpoc.views.LowPassFilter;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class FragmentRowOneColumnThree extends Fragment implements SensorEventListener, LocationListener {
+public class CompassWidgetFragment extends Fragment implements SensorEventListener, LocationListener {
 
     private static PowerManager.WakeLock wakeLock = null;
 
@@ -72,7 +69,7 @@ public class FragmentRowOneColumnThree extends Fragment implements SensorEventLi
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_row_one_column_three, null);
+        View view = inflater.inflate(R.layout.compass_widget_fragment_layout, null);
         context = getActivity();
         onStart();
         textTop = (TextView) view.findViewById(R.id.textTop);

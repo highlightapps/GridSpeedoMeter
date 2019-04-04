@@ -12,11 +12,11 @@ import android.widget.SeekBar;
 
 import com.example.viewpagerpoc.views.SteeringView;
 
-public class FragmentRowOneColumnOne extends Fragment {
+public class SteeringWidgetFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_row_one_column_one, null);
+        View view = inflater.inflate(R.layout.steering_widget_fragment_layout, null);
 
         int DEFAULT_ANGLE = 90;
 

@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +11,11 @@ import android.widget.SeekBar;
 
 import com.example.viewpagerpoc.views.TyrePressureView;
 
-public class FragmentRowOneColumnTwo extends Fragment {
+public class TyrePressureWidgetFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_row_one_column_two, null);
+        View view = inflater.inflate(R.layout.tyre_pressure_widget_fragment, null);
 
         int DEFAULT_PRESSURE = 35;
 
