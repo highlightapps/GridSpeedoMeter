@@ -16,10 +16,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void replaceFragment() {
-        WidgetFragment widgetFragment = new WidgetFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.content_frame, widgetFragment);
+        transaction.replace(R.id.content_frame, new WidgetFragment());
         transaction.addToBackStack(null);
         transaction.commit();
     }
@@ -27,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         //super.onBackPressed();
-        replaceFragment();
         finish();
     }
 }
