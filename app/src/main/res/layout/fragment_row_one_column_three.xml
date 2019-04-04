@@ -3,19 +3,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.github.anastr.speedviewlib.AwesomeSpeedometer
-        android:id="@+id/awesomeSpeedometer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true" />
-
-
     <TextView
-        android:id="@+id/pageTextView"
+        android:id="@+id/textTop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="1"
-        android:textColor="#FF0000"
-        android:textSize="40sp" />
+        android:textColor="#000000"
+        android:textSize="32dp" />
+
+    <com.example.viewpagerpoc.views.CompassView
+        android:id="@+id/compass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textTop"
+        android:background="#00000000" />
+
 </RelativeLayout>
