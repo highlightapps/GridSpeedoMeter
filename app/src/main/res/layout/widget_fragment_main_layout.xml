@@ -1,28 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
-    <com.example.viewpagerpoc.VerticalViewPager
-        android:id="@+id/viewPagerOne"
-        android:layout_width="0dp"
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:layout_alignParentTop="true"
+        android:layout_margin="10dp" />
 
-    <com.example.viewpagerpoc.VerticalViewPager
-        android:id="@+id/viewPagerTwo"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1" />
+        android:orientation="horizontal"
+        android:layout_below="@+id/seekBar"
+        tools:context=".MainActivity">
 
-    <com.example.viewpagerpoc.VerticalViewPager
-        android:id="@+id/viewPagerThree"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1" />
+        <com.example.viewpagerpoc.VerticalViewPager
+            android:id="@+id/viewPagerOne"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
-</LinearLayout>
+        <com.example.viewpagerpoc.VerticalViewPager
+            android:id="@+id/viewPagerTwo"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <com.example.viewpagerpoc.VerticalViewPager
+            android:id="@+id/viewPagerThree"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+</RelativeLayout>

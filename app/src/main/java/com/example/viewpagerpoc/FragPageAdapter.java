@@ -6,6 +6,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 public class FragPageAdapter extends FragmentPagerAdapter {
 
+    SteeringWidgetFragment steeringWidgetFragment;
+
     WidgetColumn widgetColumn;
 
     public FragPageAdapter(FragmentManager fm, WidgetColumn widgetColumn) {
@@ -31,7 +33,8 @@ public class FragPageAdapter extends FragmentPagerAdapter {
     private Fragment getColumnOneFragment(int position) {
         switch (position) {
             case 0: // row 1
-                return new SteeringWidgetFragment();
+                steeringWidgetFragment = new SteeringWidgetFragment();
+                return steeringWidgetFragment;
             case 1: // row 2
                 return new FragmentRowTwoColumnOne();
             case 2: // row 3
@@ -67,5 +70,10 @@ public class FragPageAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         return 3;
+    }
+
+
+    public void updateAngle(float angle){
+        steeringWidgetFragment.updateAngle(angle);
     }
 }

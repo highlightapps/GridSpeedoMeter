@@ -13,6 +13,9 @@ import android.widget.SeekBar;
 import com.example.viewpagerpoc.views.SteeringView;
 
 public class SteeringWidgetFragment extends Fragment {
+
+    SteeringView steeringView;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -20,7 +23,7 @@ public class SteeringWidgetFragment extends Fragment {
 
         int DEFAULT_ANGLE = 90;
 
-        final SteeringView steeringView = (SteeringView) view.findViewById(R.id.steeringView);
+        steeringView = (SteeringView) view.findViewById(R.id.steeringView);
         steeringView.setSteeringAngle(0);
 
         SeekBar seekBar = (SeekBar) view.findViewById(R.id.seekBar);
@@ -45,5 +48,9 @@ public class SteeringWidgetFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    public void updateAngle(float angle){
+        steeringView.setSteeringAngle(angle-90);
     }
 }
