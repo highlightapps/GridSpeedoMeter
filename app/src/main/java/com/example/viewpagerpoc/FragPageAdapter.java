@@ -1,68 +1,172 @@
 package com.example.viewpagerpoc;
 
+import android.content.Context;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
-public class FragPageAdapter extends FragmentPagerAdapter {
+import com.example.viewpagerpoc.views.CompassView;
+import com.example.viewpagerpoc.views.SteeringView;
+import com.example.viewpagerpoc.views.TyrePressureView;
 
-    SteeringWidgetFragment steeringWidgetFragment;
+public class FragPageAdapter extends PagerAdapter {
+
+    Context mContext;
 
     WidgetColumn widgetColumn;
+    SteeringView steeringView;
+    TextView textTop;
+    CompassView compassView;;
 
-    public FragPageAdapter(FragmentManager fm, WidgetColumn widgetColumn) {
-        super(fm);
+
+    public FragPageAdapter(Context context, WidgetColumn widgetColumn) {
+        this.mContext = context;
         this.widgetColumn = widgetColumn;
     }
 
     @Override
-    public Fragment getItem(int position) {
-
+    public Object instantiateItem(ViewGroup collection, int position) {
+        ViewGroup layout = null;
         switch (widgetColumn) {
             case FIRST_COLUMN:
-                return getColumnOneFragment(position);
+                layout = getColumnOneFragment(collection, position);
+                break;
             case SECOND_COLUMN:
-                return getColumnTwoFragment(position);
+                layout = getColumnTwoFragment(collection, position);
+                break;
             case THIRD_COLUMN:
-                return getColumnThreeFragment(position);
+                layout = getColumnThreeFragment(collection, position);
+                break;
         }
-        return null;
-
+        collection.addView(layout);
+        return layout;
     }
 
-    private Fragment getColumnOneFragment(int position) {
+    @Override
+    public void destroyItem(ViewGroup collection, int position, Object view) {
+        collection.removeView((View) view);
+    }
+
+    private ViewGroup getColumnOneFragment(ViewGroup collection, int position) {
+        LayoutInflater inflater = LayoutInflater.from(mContext);
         switch (position) {
             case 0: // row 1
-                steeringWidgetFragment = new SteeringWidgetFragment();
-                return steeringWidgetFragment;
+            {
+                ViewGroup layout = (ViewGroup) inflater.inflate(R.layout.steering_widget_fragment_layout, collection, false);
+                int DEFAULT_ANGLE = 90;
+
+                steeringView = (SteeringView) layout.findViewById(R.id.steeringView);
+                steeringView.setSteeringAngle(0);
+
+                SeekBar seekBar = (SeekBar) layout.findViewById(R.id.seekBar);
+                seekBar.setMax(180);
+                seekBar.setProgress(DEFAULT_ANGLE);
+                seekBar.refreshDrawableState();
+                seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
+                        Log.e("","--->" +progress);
+                        steeringView.setSteeringAngle(progress - 90); //steering angle should be 0 degrees when seekbar is in 90 degrees.
+                    }
+
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+
+                    }
+
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+
+                    }
+                });
+                return layout;
+            }
             case 1: // row 2
-                return new FragmentRowTwoColumnOne();
+            {
+                ViewGroup layout = (ViewGroup) inflater.inflate(R.layout.fragment_row_two_column_one, collection, false);
+                return layout;
+            }
             case 2: // row 3
-                return new FragmentRowThreeColumnOne();
+            {
+                ViewGroup layout = (ViewGroup) inflater.inflate(R.layout.fragment_row_three_column_one, collection, false);
+                return layout;
+            }
         }
         return null;
     }
 
-    private Fragment getColumnTwoFragment(int position) {
+    private ViewGroup getColumnTwoFragment(ViewGroup collection, int position) {
+        LayoutInflater inflater = LayoutInflater.from(mContext);
         switch (position) {
             case 0: // row 1
-                return new TyrePressureWidgetFragment();
+            {
+                ViewGroup layout = (ViewGroup) inflater.inflate(R.layout.tyre_pressure_widget_fragment, collection, false);
+                int DEFAULT_PRESSURE = 35;
+
+                final TyrePressureView tyrePressureView = (TyrePressureView) layout.findViewById(R.id.tyrePressureView);
+                tyrePressureView.updateTyrePressures(DEFAULT_PRESSURE, DEFAULT_PRESSURE, DEFAULT_PRESSURE, DEFAULT_PRESSURE);
+
+                SeekBar seekBar = (SeekBar) layout.findViewById(R.id.seekBar);
+                seekBar.setMax(40);
+                seekBar.setProgress(DEFAULT_PRESSURE);
+                seekBar.refreshDrawableState();
+                seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
+                        tyrePressureView.updateTyrePressures(progress, progress, progress, progress);
+                    }
+
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+
+                    }
+
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+
+                    }
+                });
+                return layout;
+            }
             case 1: // row 2
-                return new FragmentRowTwoColumnTwo();
+            {
+                ViewGroup layout = (ViewGroup) inflater.inflate(R.layout.fragment_row_two_column_two, collection, false);
+                return layout;
+            }
             case 2: // row 3
-                return new FragmentRowThreeColumnTwo();
+            {
+                ViewGroup layout = (ViewGroup) inflater.inflate(R.layout.fragment_row_three_column_two, collection, false);
+                return layout;
+            }
         }
         return null;
     }
 
-    private Fragment getColumnThreeFragment(int position) {
+    private ViewGroup getColumnThreeFragment(ViewGroup collection, int position) {
+        LayoutInflater inflater = LayoutInflater.from(mContext);
         switch (position) {
             case 0: // row 1
-                return new CompassWidgetFragment();
+            {
+                ViewGroup layout = (ViewGroup) inflater.inflate(R.layout.compass_widget_fragment_layout, collection, false);
+                textTop = (TextView) layout.findViewById(R.id.textTop);
+                compassView = (CompassView) layout.findViewById(R.id.compass);
+                return layout;
+            }
             case 1: // row 2
-                return new FragmentRowTwoColumnThree();
+            {
+                ViewGroup layout = (ViewGroup) inflater.inflate(R.layout.fragment_row_two_column_three, collection, false);
+                return layout;
+            }
             case 2: // row 3
-                return new FragmentRowThreeColumnThree();
+            {
+                ViewGroup layout = (ViewGroup) inflater.inflate(R.layout.fragment_row_three_column_three, collection, false);
+                return layout;
+            }
         }
         return null;
     }
@@ -72,8 +176,25 @@ public class FragPageAdapter extends FragmentPagerAdapter {
         return 3;
     }
 
+    @Override
+    public boolean isViewFromObject(View view, Object object) {
+        return view == object;
+    }
 
-    public void updateAngle(float angle){
-        steeringWidgetFragment.updateAngle(angle);
+
+    public void updateAngle(float angle) {
+        steeringView.setSteeringAngle(angle-90);
+    }
+
+    public void updateCompassText(String str){
+        if(textTop != null)
+            textTop.setText(str);
+    }
+
+
+    public void updateCompass(){
+        if(compassView != null){
+            compassView.postInvalidate();
+        }
     }
 }
