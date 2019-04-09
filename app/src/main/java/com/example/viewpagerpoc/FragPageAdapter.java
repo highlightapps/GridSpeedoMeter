@@ -1,12 +1,12 @@
 package com.example.viewpagerpoc;
 
 import android.content.Context;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -88,7 +88,49 @@ public class FragPageAdapter extends PagerAdapter {
             }
             case 1: // row 2
             {
-                ViewGroup layout = (ViewGroup) inflater.inflate(R.layout.fragment_row_two_column_one, collection, false);
+                ViewGroup layout = (ViewGroup) inflater.inflate(R.layout.gear_control_widget_layout, collection, false);
+                final TextView textView = (TextView) layout.findViewById(R.id.pageTextView);
+                Button btnReverse = (Button) layout.findViewById(R.id.btnReverse);
+                btnReverse.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        textView.setText("Gear: R" );
+                    }
+                });
+
+                Button btnOne = (Button) layout.findViewById(R.id.btnOne);
+                btnOne.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        textView.setText("Gear: 1" );
+                    }
+                });
+
+                Button btnTwo = (Button) layout.findViewById(R.id.btnTwo);
+                btnTwo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        textView.setText("Gear: 2" );
+                    }
+                });
+
+                Button btnThree = (Button) layout.findViewById(R.id.btnThree);
+                btnThree.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        textView.setText("Gear: 3" );
+                    }
+                });
+
+                Button btnFour = (Button) layout.findViewById(R.id.btnFour);
+                btnFour.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        textView.setText("Gear: 4" );
+                    }
+                });
+
+
                 return layout;
             }
             case 2: // row 3
