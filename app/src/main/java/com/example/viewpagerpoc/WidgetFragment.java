@@ -69,17 +69,15 @@ public class WidgetFragment extends Fragment implements SensorEventListener, Loc
 
     private static double floatBearing = 0;
 
+    ViewPager pagerOne, pagerTwo, pagerThree;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.widget_fragment_main_layout, null);
-        ViewPager pagerOne = (ViewPager)view. findViewById(R.id.viewPagerOne);
-        ViewPager pagerTwo = (ViewPager) view.findViewById(R.id.viewPagerTwo);
-        ViewPager pagerThree = (ViewPager) view.findViewById(R.id.viewPagerThree);
-
-
-        FragmentManager fm = getActivity().getSupportFragmentManager();
+        pagerOne = (ViewPager)view. findViewById(R.id.viewPagerOne);
+        pagerTwo = (ViewPager) view.findViewById(R.id.viewPagerTwo);
+        pagerThree = (ViewPager) view.findViewById(R.id.viewPagerThree);
 
         fragPageAdapterOne = new FragPageAdapter(getActivity(), WidgetColumn.FIRST_COLUMN);
         fragPageAdapterTwo = new FragPageAdapter(getActivity(), WidgetColumn.SECOND_COLUMN);
@@ -88,6 +86,90 @@ public class WidgetFragment extends Fragment implements SensorEventListener, Loc
         pagerOne.setAdapter(fragPageAdapterOne);
         pagerTwo.setAdapter(fragPageAdapterTwo);
         pagerThree.setAdapter(fragPageAdapterThree);
+
+        pagerOne.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                //This method invokes when the view comes to visible, call the required method to get the updated data..
+                switch (position){
+                    case 0:
+                        // TODO::call the required method to update the data to the first widget of pager one
+                        break;
+                    case 1:
+                        // TODO::call the required method to update the data to the second widget of pager one
+                        break;
+                    case 2:
+                        // TODO::call the required method to update the data to the third widget of pager one
+                        break;
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+        pagerTwo.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                //This method invokes when the view comes to visible, call the required method to get the updated data..
+                switch (position){
+                    case 0:
+                        // TODO::call the required method to update the data to the first widget of pager Two
+                        break;
+                    case 1:
+                        // TODO::call the required method to update the data to the second widget of pager Two
+                        break;
+                    case 2:
+                        // TODO::call the required method to update the data to the third widget of pager Two
+                        break;
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+        pagerThree.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                //This method invokes when the view comes to visible, call the required method to get the updated data..
+                switch (position){
+                    case 0:
+                        // TODO::call the required method to update the data to the first widget of pager Three
+                        break;
+                    case 1:
+                        // TODO::call the required method to update the data to the second widget of pager Three
+                        break;
+                    case 2:
+                        // TODO::call the required method to update the data to the third widget of pager Three
+                        break;
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
         // Compass Widget.
         PowerManager pm = (PowerManager) getActivity().getSystemService(Context.POWER_SERVICE);
@@ -102,6 +184,7 @@ public class WidgetFragment extends Fragment implements SensorEventListener, Loc
             public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
                 Log.e("","--->" +progress);
                 updateData(progress); //steering angle should be 0 degrees when seekbar is in 90 degrees.
+                updateWidgetEvent(null);
             }
 
             @Override
@@ -346,5 +429,62 @@ public class WidgetFragment extends Fragment implements SensorEventListener, Loc
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
         // Ignore
+    }
+
+
+    //update widget events - coming from activity
+    // This method is to update the views which are visible to the user.
+    public void updateWidgetEvent(float data[]){
+        //for viewPager - 1
+        switch (pagerOne.getCurrentItem()){
+            case 0:
+                // TODO::update the view which is present in index: 0(steering)
+                break;
+            case 1:
+                // TODO::update the view which is present in index: 1
+                break;
+            case 2:
+                // TODO::update the view which is present in index: 2
+                break;
+        }
+
+        //for viewPager - 1
+        switch (pagerOne.getCurrentItem()){
+            case 0:
+                // TODO::update the view which is present in index: 0(steering)
+                break;
+            case 1:
+                // TODO::update the view which is present in index: 1
+                break;
+            case 2:
+                // TODO::update the view which is present in index: 2
+                break;
+        }
+
+        //for viewPager - 2
+        switch (pagerTwo.getCurrentItem()){
+            case 0:
+                // TODO::update the view which is present in index: 0(Tyre Pressure)
+                break;
+            case 1:
+                // TODO::update the view which is present in index: 1
+                break;
+            case 2:
+                // TODO::update the view which is present in index: 2
+                break;
+        }
+
+        //for viewPager - 3
+        switch (pagerThree.getCurrentItem()){
+            case 0:
+                // TODO::update the view which is present in index: 0 (Compass)
+                break;
+            case 1:
+                // TODO::update the view which is present in index: 1
+                break;
+            case 2:
+                // TODO::update the view which is present in index: 2
+                break;
+        }
     }
 }
