@@ -3,24 +3,57 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <TextView
         android:id="@+id/pageTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="Gear : R"
+        android:layout_above="@+id/gearIcon"
+        android:gravity="center_horizontal"
+        android:text="Gear : Reverse"
+        android:layout_toLeftOf="@+id/gearBtnsRight"
+        android:layout_toRightOf="@+id/gearBtnsLeft"
         android:textColor="#FF0000"
-        android:textSize="40sp" />
+        android:textSize="30sp" />
+
+    <ImageView
+        android:id="@+id/gearIcon"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_above="@+id/gearBtnsBottom"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/gear_icon" />
+
 
     <LinearLayout
         android:id="@+id/gearBtnsTop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/pageTextView"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
         android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnReverse"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Reverse" />
+
+        <Button
+            android:id="@+id/btnParking"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Parking" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/gearBtnsRight"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:orientation="vertical"
+        android:layout_below="@+id/gearBtnsTop"
+        android:layout_above="@+id/gearBtnsBottom">
 
         <Button
             android:id="@+id/btnOne"
@@ -30,46 +63,43 @@
             android:text="1" />
 
         <Button
+            android:id="@+id/btnTwo"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="2" />
+
+        <Button
             android:id="@+id/btnThree"
             android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="3" />
 
-        <Button
-            android:id="@+id/btnReverse"
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="R" />
+
 
     </LinearLayout>
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/gearBtnsBottom"
-        android:layout_below="@+id/gearBtnsTop"
-        android:layout_centerInParent="true"
-        android:src="@drawable/gear_controls" />
 
     <LinearLayout
         android:id="@+id/gearBtnsBottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:orientation="horizontal"
-        android:weightSum="3">
-
+        android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnTwo"
+            android:id="@+id/btnSix"
             android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="2" />
+            android:text="6" />
+
+        <Button
+            android:id="@+id/btnFive"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="5" />
 
         <Button
             android:id="@+id/btnFour"
@@ -78,13 +108,37 @@
             android:layout_weight="1"
             android:text="4" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/gearBtnsLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:orientation="vertical"
+        android:layout_below="@+id/gearBtnsTop"
+        android:layout_above="@+id/gearBtnsBottom">
+
         <Button
-            android:id="@+id/btnExtra"
+            android:id="@+id/btnNine"
             android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@null"
-            android:text="" />
+            android:text="9" />
+
+        <Button
+            android:id="@+id/btnEight"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="8" />
+
+        <Button
+            android:id="@+id/btnSeven"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="7" />
 
     </LinearLayout>
 

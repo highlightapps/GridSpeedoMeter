@@ -94,7 +94,15 @@ public class FragPageAdapter extends PagerAdapter {
                 btnReverse.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        textView.setText("Gear: R" );
+                        textView.setText("Gear: Reverse" );
+                    }
+                });
+
+                Button btnParking = (Button) layout.findViewById(R.id.btnParking);
+                btnParking.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        textView.setText("Gear: Parking" );
                     }
                 });
 
@@ -102,7 +110,7 @@ public class FragPageAdapter extends PagerAdapter {
                 btnOne.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        textView.setText("Gear: 1" );
+                        textView.setText("Gear: One" );
                     }
                 });
 
@@ -110,7 +118,7 @@ public class FragPageAdapter extends PagerAdapter {
                 btnTwo.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        textView.setText("Gear: 2" );
+                        textView.setText("Gear: Two" );
                     }
                 });
 
@@ -118,7 +126,7 @@ public class FragPageAdapter extends PagerAdapter {
                 btnThree.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        textView.setText("Gear: 3" );
+                        textView.setText("Gear: Three" );
                     }
                 });
 
@@ -126,10 +134,49 @@ public class FragPageAdapter extends PagerAdapter {
                 btnFour.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        textView.setText("Gear: 4" );
+                        textView.setText("Gear: Four" );
                     }
                 });
 
+                Button btnFive = (Button) layout.findViewById(R.id.btnFive);
+                btnFive.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        textView.setText("Gear: Five" );
+                    }
+                });
+
+                Button btnSix = (Button) layout.findViewById(R.id.btnSix);
+                btnSix.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        textView.setText("Gear: Six" );
+                    }
+                });
+
+                Button btnSeven = (Button) layout.findViewById(R.id.btnSeven);
+                btnSeven.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        textView.setText("Gear: Seven" );
+                    }
+                });
+
+                Button btnEight = (Button) layout.findViewById(R.id.btnEight);
+                btnEight.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        textView.setText("Gear: Eight" );
+                    }
+                });
+
+                Button btnNine = (Button) layout.findViewById(R.id.btnNine);
+                btnNine.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        textView.setText("Gear: Nine" );
+                    }
+                });
 
                 return layout;
             }
