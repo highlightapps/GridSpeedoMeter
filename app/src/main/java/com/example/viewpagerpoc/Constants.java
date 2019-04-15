@@ -9,9 +9,8 @@ public class Constants {
     private static Object[][] appsData = {
             {"Gmail Application", R.drawable.gmail_icon, Boolean.TRUE, "com.google.android.gm", null},
             {"Steering Activity", R.drawable.steering, Boolean.FALSE, null, SteeringActivity.class},
+            {"Chrome Application", R.drawable.chrome, Boolean.TRUE, "com.android.chrome", null},
 
-
-            {"Gmail Application", R.drawable.gmail_icon, Boolean.TRUE, "com.google.android.gm", null},
             {"Steering Activity", R.drawable.steering, Boolean.FALSE, null, SteeringActivity.class},
             {"Gmail Application", R.drawable.gmail_icon, Boolean.TRUE, "com.google.android.gm", null},
             {"Steering Activity", R.drawable.steering, Boolean.FALSE, null, SteeringActivity.class},
