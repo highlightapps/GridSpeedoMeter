@@ -20,6 +20,7 @@ public class FragPageAdapter extends FragmentPagerAdapter {
 
         switch (widgetColumn) {
             case FIRST_COLUMN:
+
                 return getColumnOneFragment(position);
             case SECOND_COLUMN:
                 return getColumnTwoFragment(position);
