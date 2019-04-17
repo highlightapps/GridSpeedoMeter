@@ -30,14 +30,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         imgHome.setOnClickListener(this);
         imgBack.setOnClickListener(this);
 
-        LeftFragment leftFragment = new LeftFragment();
-        RightFragment rightFragment = new RightFragment();
+        ZoneAFragment zoneAFragment = new ZoneAFragment();
+        ZoneBFragment zoneBFragment = new ZoneBFragment();
 
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
 
-        transaction.add(R.id.fragmentLeft, leftFragment, "left_fragment_tag");
-        transaction.add(R.id.fragmentRight, rightFragment, "right_fragment_tag");
+        transaction.add(R.id.fragmentZoneA, zoneAFragment, "zone_a_fragment_tag");
+        transaction.add(R.id.fragmentZoneB, zoneBFragment, "zone_b_fragment_tag");
 
 
         transaction.commit();

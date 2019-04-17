@@ -43,13 +43,13 @@
 
 
         <FrameLayout
-            android:id="@+id/fragmentLeft"
+            android:id="@+id/fragmentZoneA"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight=".75"/>
 
         <FrameLayout
-            android:id="@+id/fragmentRight"
+            android:id="@+id/fragmentZoneB"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight=".25"/>
