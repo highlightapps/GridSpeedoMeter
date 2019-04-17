@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_centerInParent="true"
-    android:background="#8888"
-    android:layout_marginTop="40dp"
-    android:layout_marginBottom="40dp"
-    android:padding="20dp">
+    android:orientation="vertical"
+    android:background="#00FFFF">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:gravity="top"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:orientation="horizontal"
         android:weightSum="4">
 
@@ -22,6 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@null"
+            android:layout_gravity="center"
             android:drawableTop="@drawable/navigation"
             android:text="Navigation"
             android:textAllCaps="false"
@@ -32,6 +29,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_gravity="center"
             android:background="@null"
             android:drawableTop="@drawable/blue_tooth"
             android:text="Bluetooth"
@@ -44,6 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@null"
+            android:layout_gravity="center"
             android:drawableTop="@drawable/radio"
             android:text="Radio"
             android:textAllCaps="false"
@@ -55,6 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@null"
+            android:layout_gravity="center"
             android:drawableTop="@drawable/phone"
             android:text="Phone"
             android:textAllCaps="false"
@@ -65,9 +65,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:gravity="bottom"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:orientation="horizontal"
         android:weightSum="4">
 
@@ -77,6 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@null"
+            android:layout_gravity="center"
             android:drawableTop="@drawable/settings"
             android:text="Settings"
             android:textAllCaps="false"
@@ -88,6 +88,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@null"
+            android:layout_gravity="center"
             android:drawableTop="@drawable/users"
             android:text="Users"
             android:textAllCaps="false"
@@ -100,6 +101,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@null"
+            android:layout_gravity="center"
             android:drawableTop="@drawable/blue_tooth"
             android:text="Settings"
             android:textAllCaps="false"
@@ -111,13 +113,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@null"
+            android:layout_gravity="center"
             android:drawableTop="@drawable/blue_tooth"
             android:text="Settings"
             android:textAllCaps="false"
             android:textSize="12sp" />
 
-
     </LinearLayout>
 
-
-</RelativeLayout>
+</LinearLayout>
