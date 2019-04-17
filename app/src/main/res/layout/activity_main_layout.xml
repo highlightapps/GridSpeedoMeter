@@ -35,11 +35,24 @@
 
     </LinearLayout>
 
-    <GridView
-        android:id="@+id/gridView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:columnWidth="110dp"
-        android:gravity="center"
-        android:numColumns="auto_fit" />
+        android:layout_height="wrap_content"
+        android:weightSum="1"
+        android:orientation="horizontal">
+
+
+        <FrameLayout
+            android:id="@+id/fragmentLeft"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".75"/>
+
+        <FrameLayout
+            android:id="@+id/fragmentRight"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".25"/>
+    </LinearLayout>
+
 </LinearLayout>

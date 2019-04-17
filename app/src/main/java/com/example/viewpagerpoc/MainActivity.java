@@ -6,60 +6,42 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
-import android.widget.AdapterView;
-import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.Toast;
+
 
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     ImageView imgHome;
     ImageView imgBack;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_layout);
 
-
-
-         imgHome = (ImageView)findViewById(R.id.imgHome);
-         imgBack = (ImageView)findViewById(R.id.imgBack);
+        imgHome = (ImageView) findViewById(R.id.imgHome);
+        imgBack = (ImageView) findViewById(R.id.imgBack);
         imgHome.setOnClickListener(this);
         imgBack.setOnClickListener(this);
-        //Grid view setup..
-        GridView gridView = (GridView) findViewById(R.id.gridView);
-        final AppsAdapter appsAdapter = new AppsAdapter(this, Constants.getAppsData());
-        gridView.setAdapter(appsAdapter);
 
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                AppsModel appsModel = appsAdapter.getItem(position);
-                Intent launchIntent = null;
-                if(appsModel.getAppLaunch()){
-                    //launch app
-                    launchIntent = getPackageManager().getLaunchIntentForPackage(appsModel.getPackageId());
-                }
-                else {
-                    //launch activity
-                    launchIntent = new Intent(MainActivity.this, appsModel.getActivityName());
-                }
+        LeftFragment leftFragment = new LeftFragment();
+        RightFragment rightFragment = new RightFragment();
 
-                try {
-                    startActivity(launchIntent);
-                }
-                catch (Exception e){
-                    Toast.makeText(MainActivity.this, "Something went wrong launching the app/activity", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+
+        transaction.add(R.id.fragmentLeft, leftFragment, "left_fragment_tag");
+        transaction.add(R.id.fragmentRight, rightFragment, "right_fragment_tag");
+
+
+        transaction.commit();
+
     }
 
 
@@ -90,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return super.onKeyDown(keyCode, event);
     }
 
-    private List<ApplicationInfo> getInstalledAppsFromDevice(){
+    private List<ApplicationInfo> getInstalledAppsFromDevice() {
         final PackageManager pm = getPackageManager();
         //get a list of installed apps.
         List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
@@ -99,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.imgHome:
                 Intent startMain = new Intent(Intent.ACTION_MAIN);
                 startMain.addCategory(Intent.CATEGORY_HOME);
