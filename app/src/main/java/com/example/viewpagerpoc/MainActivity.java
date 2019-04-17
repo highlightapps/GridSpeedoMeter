@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main_layout);
 
+
+
          imgHome = (ImageView)findViewById(R.id.imgHome);
          imgBack = (ImageView)findViewById(R.id.imgBack);
         imgHome.setOnClickListener(this);
