@@ -54,7 +54,7 @@ public class ZoneAFragment extends BaseFragment implements View.OnClickListener 
                 break;
 
             case R.id.btnBluetooth:
-                fragment = new BluetoothFragmentOld();
+                fragment = new BluetoothFragment();
                 replaceFragment(fragment);
                 break;
 
