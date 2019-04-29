@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 
-public class ZoneAFragment extends Fragment implements View.OnClickListener {
+public class ZoneAFragment extends BaseFragment implements View.OnClickListener {
     Context mContext;
 
     @Override

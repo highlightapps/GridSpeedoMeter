@@ -6,7 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class BluetoothOptionsFragment extends Fragment {
+public class BluetoothOptionsFragment extends BaseFragment {
+
+    public static final String TAG = BluetoothOptionsFragment.class.getName();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

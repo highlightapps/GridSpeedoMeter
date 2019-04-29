@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class NavigationFragment extends Fragment {
+public class NavigationFragment extends BaseFragment {
     Context mContext;
 
     @Override

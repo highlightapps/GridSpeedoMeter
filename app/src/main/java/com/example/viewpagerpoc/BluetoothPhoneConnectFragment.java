@@ -6,7 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class BluetoothPhoneConnectFragment extends Fragment {
+public class BluetoothPhoneConnectFragment extends BaseFragment {
+
+    public static String TAG = BluetoothPhoneConnectFragment.class.getName();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

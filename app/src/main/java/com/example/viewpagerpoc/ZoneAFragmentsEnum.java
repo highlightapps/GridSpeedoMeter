@@ -1,0 +1,12 @@
+package com.example.viewpagerpoc;
+
+public enum ZoneAFragmentsEnum {
+    ZONE_A_FRAGMENT,
+    NAVIGATION_FRAGMENT,
+    BLUETOOTH_FRAGMENT,
+
+
+    BLUETOOTH_OPTIONS_FRAGMENT,
+    BLUETOOTH_SEARCH_FRAGMENT,
+    BLUETOOTH_PHONE_CONNECT_FRAGMENT
+}

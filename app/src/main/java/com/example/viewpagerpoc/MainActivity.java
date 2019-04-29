@@ -10,7 +10,12 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+import static com.example.viewpagerpoc.ZoneAFragmentsEnum.ZONE_A_FRAGMENT;
+
+public class MainActivity extends AppCompatActivity implements ZoneAFragmentReplaceCallbacks, View.OnClickListener {
+
+    ZoneAFragmentsEnum currentZoneAFragment = ZONE_A_FRAGMENT;
+
     ImageView imgHome;
     ImageView imgBack;
 
@@ -79,5 +84,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 finish();
                 break;
         }
+    }
+
+    @Override
+    public void updateFragment(ZoneAFragmentsEnum tag) {
+        switch (tag) {
+            case BLUETOOTH_FRAGMENT:
+
+                break;
+            case BLUETOOTH_OPTIONS_FRAGMENT:
+
+                break;
+            case BLUETOOTH_SEARCH_FRAGMENT:
+
+                break;
+            case BLUETOOTH_PHONE_CONNECT_FRAGMENT:
+
+                break;
+        }
+    }
+
+    @Override
+    public void goBackToPreviousFragment() {
+
     }
 }
