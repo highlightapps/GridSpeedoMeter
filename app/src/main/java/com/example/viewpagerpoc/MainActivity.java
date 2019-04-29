@@ -1,8 +1,6 @@
 package com.example.viewpagerpoc;
 
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -11,9 +9,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
-
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     ImageView imgHome;
@@ -39,11 +34,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         transaction.add(R.id.fragmentZoneA, zoneAFragment, "zone_a_fragment_tag");
         transaction.add(R.id.fragmentZoneB, zoneBFragment, "zone_b_fragment_tag");
 
-
         transaction.commit();
 
     }
-
 
     @Override
     protected void onResume() {
@@ -70,13 +63,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return true;
         }
         return super.onKeyDown(keyCode, event);
-    }
-
-    private List<ApplicationInfo> getInstalledAppsFromDevice() {
-        final PackageManager pm = getPackageManager();
-        //get a list of installed apps.
-        List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
-        return packages;
     }
 
     @Override
