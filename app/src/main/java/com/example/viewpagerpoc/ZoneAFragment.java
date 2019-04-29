@@ -49,44 +49,30 @@ public class ZoneAFragment extends BaseFragment implements View.OnClickListener 
         Fragment fragment = null;
         switch (view.getId()) {
             case R.id.btnNavigation:
-                fragment = new NavigationFragment();
-                replaceFragment(fragment);
+                zoneAFragmentReplaceCallbacks.updateFragment(ZoneAFragmentsEnum.NAVIGATION_FRAGMENT);
                 break;
 
             case R.id.btnBluetooth:
-                fragment = new BluetoothFragment();
-                replaceFragment(fragment);
+                zoneAFragmentReplaceCallbacks.updateFragment(ZoneAFragmentsEnum.BLUETOOTH_FRAGMENT);
                 break;
 
 
             case R.id.btnRadio:
-                fragment = new RadioFragment();
-                replaceFragment(fragment);
+                zoneAFragmentReplaceCallbacks.updateFragment(ZoneAFragmentsEnum.RADIO_FRAGMENT);
                 break;
-
 
             case R.id.btnPhone:
-                fragment = new PhoneFragment();
-                replaceFragment(fragment);
+                zoneAFragmentReplaceCallbacks.updateFragment(ZoneAFragmentsEnum.PHONE_FRAGMENT);
                 break;
 
-
             case R.id.btnSettings:
-                fragment = new SettingsFragment();
-                replaceFragment(fragment);
+                zoneAFragmentReplaceCallbacks.updateFragment(ZoneAFragmentsEnum.SETTINGS_FRAGMENT);
                 break;
 
             case R.id.btnUsers:
-                fragment = new UsersFragment();
-                replaceFragment(fragment);
+                zoneAFragmentReplaceCallbacks.updateFragment(ZoneAFragmentsEnum.USER_FRAGMENT);
                 break;
         }
     }
 
-    public void replaceFragment(Fragment fragment) {
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragmentZoneA, fragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
-    }
 }

@@ -2,6 +2,7 @@ package com.example.viewpagerpoc;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -10,9 +11,14 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 
+import java.util.Stack;
+
+import static com.example.viewpagerpoc.ZoneAFragmentsEnum.BLUETOOTH_FRAGMENT;
 import static com.example.viewpagerpoc.ZoneAFragmentsEnum.ZONE_A_FRAGMENT;
 
 public class MainActivity extends AppCompatActivity implements ZoneAFragmentReplaceCallbacks, View.OnClickListener {
+
+    Stack<ZoneAFragmentsEnum> zoneAFragmentsEnumStack = new Stack<>();
 
     ZoneAFragmentsEnum currentZoneAFragment = ZONE_A_FRAGMENT;
 
@@ -31,6 +37,8 @@ public class MainActivity extends AppCompatActivity implements ZoneAFragmentRepl
         imgBack.setOnClickListener(this);
 
         ZoneAFragment zoneAFragment = new ZoneAFragment();
+        zoneAFragment.setZoneAFragmentReplaceCallbacks(this);
+
         ZoneBFragment zoneBFragment = new ZoneBFragment();
 
         FragmentManager manager = getSupportFragmentManager();
@@ -81,31 +89,81 @@ public class MainActivity extends AppCompatActivity implements ZoneAFragmentRepl
                 break;
 
             case R.id.imgBack:
-                finish();
+                goBackToPreviousFragment();
                 break;
         }
     }
 
     @Override
-    public void updateFragment(ZoneAFragmentsEnum tag) {
-        switch (tag) {
+    public void updateFragment(ZoneAFragmentsEnum zoneAFragmentsEnum) {
+
+        if (currentZoneAFragment == zoneAFragmentsEnum) return;
+        zoneAFragmentsEnumStack.push(currentZoneAFragment);
+        currentZoneAFragment = zoneAFragmentsEnum;
+
+        BaseFragment fragment = null;
+        switch (zoneAFragmentsEnum) {
             case BLUETOOTH_FRAGMENT:
 
+                fragment = new BluetoothFragment();
                 break;
+
             case BLUETOOTH_OPTIONS_FRAGMENT:
-
+                fragment = new BluetoothOptionsFragment();
                 break;
+
             case BLUETOOTH_SEARCH_FRAGMENT:
-
+                fragment = new BluetoothSearchFragment();
                 break;
+
             case BLUETOOTH_PHONE_CONNECT_FRAGMENT:
-
+                fragment = new BluetoothPhoneConnectFragment();
                 break;
+
+            case NAVIGATION_FRAGMENT:
+                fragment = new NavigationFragment();
+                break;
+
+            case RADIO_FRAGMENT:
+                fragment = new RadioFragment();
+                break;
+
+            case PHONE_FRAGMENT:
+                fragment = new PhoneFragment();
+                break;
+
+            case SETTINGS_FRAGMENT:
+                fragment = new SettingsFragment();
+                break;
+
+            case USER_FRAGMENT:
+                fragment = new UsersFragment();
+                break;
+
+            case ZONE_A_FRAGMENT:
+                fragment = new ZoneAFragment();
+                break;
+        }
+        if(fragment != null) {
+            fragment.setZoneAFragmentReplaceCallbacks(this);
+            replaceFragment(fragment);
         }
     }
 
     @Override
     public void goBackToPreviousFragment() {
+        if(zoneAFragmentsEnumStack.empty()) {
+            finish();
+            return;
+        }
+        ZoneAFragmentsEnum zoneAFragmentsEnum = zoneAFragmentsEnumStack.pop();
+        updateFragment(zoneAFragmentsEnum);
+    }
 
+    public void replaceFragment(Fragment fragment) {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragmentZoneA, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 }

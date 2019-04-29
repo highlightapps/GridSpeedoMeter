@@ -3,6 +3,10 @@ package com.example.viewpagerpoc;
 public enum ZoneAFragmentsEnum {
     ZONE_A_FRAGMENT,
     NAVIGATION_FRAGMENT,
+    RADIO_FRAGMENT,
+    PHONE_FRAGMENT,
+    SETTINGS_FRAGMENT,
+    USER_FRAGMENT,
     BLUETOOTH_FRAGMENT,
 
 
