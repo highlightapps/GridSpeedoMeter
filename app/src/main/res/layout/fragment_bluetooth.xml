@@ -63,6 +63,7 @@
         android:background="@color/ash" />
 
     <LinearLayout
+        android:id="@+id/addNewDeviceLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"

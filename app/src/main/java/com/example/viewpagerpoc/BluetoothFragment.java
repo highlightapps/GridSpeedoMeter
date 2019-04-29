@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class BluetoothFragment extends BaseFragment {
@@ -25,5 +26,14 @@ public class BluetoothFragment extends BaseFragment {
                 zoneAFragmentReplaceCallbacks.updateFragment(ZoneAFragmentsEnum.BLUETOOTH_OPTIONS_FRAGMENT);
             }
         });
+
+        LinearLayout addNewDeviceLayout = (LinearLayout) view.findViewById(R.id.addNewDeviceLayout);
+        addNewDeviceLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                zoneAFragmentReplaceCallbacks.updateFragment(ZoneAFragmentsEnum.BLUETOOTH_SEARCH_FRAGMENT);
+            }
+        });
+
     }
 }

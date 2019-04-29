@@ -50,6 +50,8 @@ public class BluetoothPhoneConnectFragment extends BaseFragment {
 
     private void initViews(View view) {
         txtSearching = (TextView)  view.findViewById(R.id.txtSearching);
+        listViewDetected = (ListView) view.findViewById(R.id.listViewDetected);
+        listViewPaired = (ListView) view.findViewById(R.id.listViewPaired);
 
         arrayListpaired = new ArrayList<String>();
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
