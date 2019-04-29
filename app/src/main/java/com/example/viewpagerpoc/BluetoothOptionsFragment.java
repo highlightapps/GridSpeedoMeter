@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class BluetoothOptionsFragment extends BaseFragment {
 
@@ -46,14 +47,23 @@ public class BluetoothOptionsFragment extends BaseFragment {
     private void onBluetooth() {
         if(!bluetoothAdapter.isEnabled())
         {
+            Toast.makeText(getActivity(), "Bluetooth is enabled", Toast.LENGTH_LONG).show();
             bluetoothAdapter.enable();
             Log.i("Log", "Bluetooth is Enabled");
+        } else {
+            Toast.makeText(getActivity(), "Bluetooth is already enabled", Toast.LENGTH_LONG).show();
         }
+        zoneAFragmentReplaceCallbacks.goBackToPreviousFragment();
     }
     private void offBluetooth() {
         if(bluetoothAdapter.isEnabled())
         {
+            Toast.makeText(getActivity(), "Bluetooth is turned off", Toast.LENGTH_LONG).show();
             bluetoothAdapter.disable();
         }
+        else {
+            Toast.makeText(getActivity(), "Bluetooth is already enabled", Toast.LENGTH_LONG).show();
+        }
+        zoneAFragmentReplaceCallbacks.goBackToPreviousFragment();
     }
 }
