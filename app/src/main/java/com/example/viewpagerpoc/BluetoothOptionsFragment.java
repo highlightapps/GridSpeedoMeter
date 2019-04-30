@@ -47,9 +47,8 @@ public class BluetoothOptionsFragment extends BaseFragment {
     private void onBluetooth() {
         if(!bluetoothAdapter.isEnabled())
         {
-            Toast.makeText(getActivity(), "Bluetooth is enabled", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "Bluetooth is turned on", Toast.LENGTH_LONG).show();
             bluetoothAdapter.enable();
-            Log.i("Log", "Bluetooth is Enabled");
         } else {
             Toast.makeText(getActivity(), "Bluetooth is already enabled", Toast.LENGTH_LONG).show();
         }
@@ -62,7 +61,7 @@ public class BluetoothOptionsFragment extends BaseFragment {
             bluetoothAdapter.disable();
         }
         else {
-            Toast.makeText(getActivity(), "Bluetooth is already enabled", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "Bluetooth is already disabled", Toast.LENGTH_LONG).show();
         }
         zoneAFragmentReplaceCallbacks.goBackToPreviousFragment();
     }

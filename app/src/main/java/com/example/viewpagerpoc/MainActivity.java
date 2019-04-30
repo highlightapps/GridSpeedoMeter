@@ -13,17 +13,13 @@ import android.widget.ImageView;
 
 import java.util.Stack;
 
-import static com.example.viewpagerpoc.ZoneAFragmentsEnum.BLUETOOTH_FRAGMENT;
 import static com.example.viewpagerpoc.ZoneAFragmentsEnum.ZONE_A_FRAGMENT;
+
 
 public class MainActivity extends AppCompatActivity implements ZoneAFragmentReplaceCallbacks, View.OnClickListener {
 
     Stack<ZoneAFragmentsEnum> zoneAFragmentsEnumStack = new Stack<>();
-
     ZoneAFragmentsEnum currentZoneAFragment = ZONE_A_FRAGMENT;
-
-    ImageView imgHome;
-    ImageView imgBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +27,8 @@ public class MainActivity extends AppCompatActivity implements ZoneAFragmentRepl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_layout);
 
-        imgHome = (ImageView) findViewById(R.id.imgHome);
-        imgBack = (ImageView) findViewById(R.id.imgBack);
+        ImageView imgHome = (ImageView) findViewById(R.id.imgHome);
+        ImageView imgBack = (ImageView) findViewById(R.id.imgBack);
         imgHome.setOnClickListener(this);
         imgBack.setOnClickListener(this);
 
@@ -101,6 +97,27 @@ public class MainActivity extends AppCompatActivity implements ZoneAFragmentRepl
         zoneAFragmentsEnumStack.push(currentZoneAFragment);
         currentZoneAFragment = zoneAFragmentsEnum;
 
+        replaceFragment(zoneAFragmentsEnum);
+    }
+
+
+
+    @Override
+    public void goBackToPreviousFragment() {
+        if(zoneAFragmentsEnumStack.empty()) {
+            finish();
+            return;
+        }
+
+        ZoneAFragmentsEnum zoneAFragmentsEnum = zoneAFragmentsEnumStack.pop();
+        if (currentZoneAFragment == zoneAFragmentsEnum) return;
+        currentZoneAFragment = zoneAFragmentsEnum;
+
+        replaceFragment(zoneAFragmentsEnum);
+    }
+
+    public void replaceFragment(ZoneAFragmentsEnum zoneAFragmentsEnum) {
+
         BaseFragment fragment = null;
         switch (zoneAFragmentsEnum) {
             case BLUETOOTH_FRAGMENT:
@@ -144,26 +161,14 @@ public class MainActivity extends AppCompatActivity implements ZoneAFragmentRepl
                 fragment = new ZoneAFragment();
                 break;
         }
+
         if(fragment != null) {
             fragment.setZoneAFragmentReplaceCallbacks(this);
-            replaceFragment(fragment);
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragmentZoneA, fragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
         }
-    }
 
-    @Override
-    public void goBackToPreviousFragment() {
-        if(zoneAFragmentsEnumStack.empty()) {
-            finish();
-            return;
-        }
-        ZoneAFragmentsEnum zoneAFragmentsEnum = zoneAFragmentsEnumStack.pop();
-        updateFragment(zoneAFragmentsEnum);
-    }
-
-    public void replaceFragment(Fragment fragment) {
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragmentZoneA, fragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
     }
 }

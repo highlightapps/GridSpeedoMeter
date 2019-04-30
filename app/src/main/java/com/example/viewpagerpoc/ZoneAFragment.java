@@ -46,7 +46,6 @@ public class ZoneAFragment extends BaseFragment implements View.OnClickListener 
 
     @Override
     public void onClick(View view) {
-        Fragment fragment = null;
         switch (view.getId()) {
             case R.id.btnNavigation:
                 zoneAFragmentReplaceCallbacks.updateFragment(ZoneAFragmentsEnum.NAVIGATION_FRAGMENT);
