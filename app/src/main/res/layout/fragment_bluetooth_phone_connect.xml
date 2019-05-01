@@ -46,8 +46,8 @@
         android:layout_toRightOf="@+id/txtBack"
         android:text="Select functions to select for this device. Note: Each can only be connected to a single device."
         android:textColor="#FFFFFF"
-        android:padding="10dp"
-        android:textSize="20sp" />
+        android:layout_margin="20dp"
+        android:textSize="18sp" />
 
 
     <LinearLayout
@@ -73,14 +73,8 @@
                 android:text="Audio"
                 android:textAllCaps="false"
                 android:textColor="#ffffff"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
-            <ImageButton
-                android:layout_width="45dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginLeft="15dp"
-                android:src="@drawable/right_mark"
-                android:layout_height="45dp" />
 
 
 
@@ -104,14 +98,8 @@
                 android:text="Phone"
                 android:textAllCaps="false"
                 android:textColor="#ffffff"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
-            <ImageButton
-                android:layout_width="45dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginLeft="15dp"
-                android:src="@drawable/right_mark"
-                android:layout_height="45dp" />
 
 
 
@@ -132,17 +120,10 @@
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:drawableTop="@drawable/internet"
-                android:text="Internet tethering"
+                android:text="Internet Tethering"
                 android:textAllCaps="false"
                 android:textColor="#ffffff"
-                android:textSize="20sp" />
-
-            <ImageButton
-                android:layout_width="45dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginLeft="55dp"
-                android:src="@drawable/right_mark"
-                android:layout_height="45dp" />
+                android:textSize="15sp" />
 
 
 

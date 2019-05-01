@@ -53,7 +53,7 @@ public class BluetoothSearchFragment extends BaseFragment {
 
 
         detectedAdapter = new ArrayAdapter<String>(mContext,
-                android.R.layout.simple_list_item_single_choice) {
+                android.R.layout.simple_list_item_1) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
