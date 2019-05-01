@@ -9,7 +9,6 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,18 +25,11 @@ import java.util.Set;
 
 public class BluetoothSearchFragment extends BaseFragment {
 
-
-
-    static HandleSeacrh handleSeacrh;
     Context mContext;
-    ListView listViewPaired;
     ListView listViewDetected;
-    ArrayList<String> arrayListpaired;
     TextView txtSearching;
-    ArrayAdapter<String> adapter, detectedAdapter;
+    ArrayAdapter<String> detectedAdapter;
     BluetoothDevice bdDevice;
-    ArrayList<BluetoothDevice> arrayListPairedBluetoothDevices;
-    ListItemClickedonPaired listItemClickedonPaired;
     BluetoothAdapter bluetoothAdapter = null;
     ArrayList<BluetoothDevice> arrayListBluetoothDevices = null;
     ListItemClicked listItemClicked;
@@ -51,59 +43,30 @@ public class BluetoothSearchFragment extends BaseFragment {
     }
 
     private void initViews(View view) {
-        txtSearching = (TextView)  view.findViewById(R.id.txtSearching);
+        txtSearching = (TextView) view.findViewById(R.id.txtSearching);
         listViewDetected = (ListView) view.findViewById(R.id.listViewDetected);
-        listViewPaired = (ListView) view.findViewById(R.id.listViewPaired);
-
-        arrayListpaired = new ArrayList<String>();
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        handleSeacrh = new HandleSeacrh();
-        arrayListPairedBluetoothDevices = new ArrayList<BluetoothDevice>();
-        listItemClickedonPaired = new ListItemClickedonPaired();
+
         arrayListBluetoothDevices = new ArrayList<BluetoothDevice>();
-        adapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_1, arrayListpaired);
         detectedAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_single_choice);
         listViewDetected.setAdapter(detectedAdapter);
         listItemClicked = new ListItemClicked();
         detectedAdapter.notifyDataSetChanged();
-        listViewPaired.setAdapter(adapter);
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        getPairedDevices();
-        txtSearching.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                arrayListBluetoothDevices.clear();
-                startSearching();
-            }
-        });
         listViewDetected.setOnItemClickListener(listItemClicked);
-        listViewPaired.setOnItemClickListener(listItemClickedonPaired);
     }
 
-    private void getPairedDevices() {
-        Set<BluetoothDevice> pairedDevice = bluetoothAdapter.getBondedDevices();
-        if (pairedDevice.size() > 0) {
-            for (BluetoothDevice device : pairedDevice) {
-                arrayListpaired.add(device.getName() + "\n" + device.getAddress());
-                arrayListPairedBluetoothDevices.add(device);
-            }
-        }
-        adapter.notifyDataSetChanged();
-    }
-    public boolean removeBond(BluetoothDevice btDevice)
-            throws Exception {
-        Class btClass = Class.forName("android.bluetooth.BluetoothDevice");
-        Method removeBondMethod = btClass.getMethod("removeBond");
-        Boolean returnValue = (Boolean) removeBondMethod.invoke(btDevice);
-        return returnValue.booleanValue();
+    @Override
+    public void onResume() {
+        super.onResume();
+        startSearching();
     }
 
-    public boolean createBond(BluetoothDevice btDevice)
-            throws Exception {
+    public boolean createBond(BluetoothDevice btDevice) throws Exception {
         Class class1 = Class.forName("android.bluetooth.BluetoothDevice");
         Method createBondMethod = class1.getMethod("createBond");
         Boolean returnValue = (Boolean) createBondMethod.invoke(btDevice);
@@ -113,48 +76,36 @@ public class BluetoothSearchFragment extends BaseFragment {
     private BroadcastReceiver myReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Message msg = Message.obtain();
             String action = intent.getAction();
-            if(BluetoothDevice.ACTION_FOUND.equals(action)){
-                Toast.makeText(context, "ACTION_FOUND", Toast.LENGTH_SHORT).show();
-
+            if (BluetoothDevice.ACTION_FOUND.equals(action)) {
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                try
-                {
-                    //device.getClass().getMethod("setPairingConfirmation", boolean.class).invoke(device, true);
-                    //device.getClass().getMethod("cancelPairingUserInput", boolean.class).invoke(device);
-                }
-                catch (Exception e) {
-                    Log.i("Log", "Inside the exception: ");
-                    e.printStackTrace();
-                }
-
-                if(arrayListBluetoothDevices.size()<1) // this checks if the size of bluetooth device is 0,then add the
-                {                                           // device to the arraylist.
-                    detectedAdapter.add(device.getName()+"\n"+device.getAddress());
-                    arrayListBluetoothDevices.add(device);
-                    detectedAdapter.notifyDataSetChanged();
-                }
-                else
-                {
-                    boolean flag = true;    // flag to indicate that particular device is already in the arlist or not
-                    for(int i = 0; i<arrayListBluetoothDevices.size();i++)
-                    {
-                        if(device.getAddress().equals(arrayListBluetoothDevices.get(i).getAddress()))
-                        {
-                            flag = false;
+                Set<BluetoothDevice> pairedDevice = bluetoothAdapter.getBondedDevices();
+                if (pairedDevice.size() > 0) {
+                    for (BluetoothDevice bluetoothDevice : pairedDevice) {
+                        if (!arrayListBluetoothDevices.contains(bluetoothDevice)) {
+                            detectedAdapter.add(bluetoothDevice.getName() + "\n" + bluetoothDevice.getAddress());
+                            arrayListBluetoothDevices.add(bluetoothDevice);
+                            detectedAdapter.notifyDataSetChanged();
                         }
                     }
-                    if(flag == true)
-                    {
-                        detectedAdapter.add(device.getName()+"\n"+device.getAddress());
-                        arrayListBluetoothDevices.add(device);
-                        detectedAdapter.notifyDataSetChanged();
+                }
+                if (arrayListBluetoothDevices.size() < 1) { // this checks if the size of bluetooth device is 0,then add the
+                    detectedAdapter.add(device.getName() + "\n" + device.getAddress());
+                    arrayListBluetoothDevices.add(device);
+                    detectedAdapter.notifyDataSetChanged();
+                } else {
+                    for (int i = 0; i < arrayListBluetoothDevices.size(); i++) {
+                        if (!arrayListBluetoothDevices.contains(device)) {
+                            detectedAdapter.add(device.getName() + "\n" + device.getAddress());
+                            arrayListBluetoothDevices.add(device);
+                            detectedAdapter.notifyDataSetChanged();
+                        }
                     }
                 }
             }
         }
     };
+
     private void startSearching() {
         Log.i("Log", "in the start searching method");
         IntentFilter intentFilter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
@@ -166,55 +117,15 @@ public class BluetoothSearchFragment extends BaseFragment {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             bdDevice = arrayListBluetoothDevices.get(position);
-            Log.i("Log", "The dvice : " + bdDevice.toString());
-
-            Boolean isBonded = false;
             try {
-                isBonded = createBond(bdDevice);
+                boolean isBonded = createBond(bdDevice);
                 if (isBonded) {
-                    getPairedDevices();
-                    adapter.notifyDataSetChanged();
+                    Toast.makeText(mContext, "device connected successfully", Toast.LENGTH_SHORT).show();
+                    zoneAFragmentReplaceCallbacks.updateFragment(ZoneAFragmentsEnum.BLUETOOTH_PHONE_CONNECT_FRAGMENT);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            Log.i("Log", "The bond is created: " + isBonded);
         }
     }
-
-    class ListItemClickedonPaired implements AdapterView.OnItemClickListener {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            bdDevice = arrayListPairedBluetoothDevices.get(position);
-            try {
-                Boolean removeBonding = removeBond(bdDevice);
-                if (removeBonding) {
-                    arrayListpaired.remove(position);
-                    adapter.notifyDataSetChanged();
-                }
-
-
-                Log.i("Log", "Removed" + removeBonding);
-            } catch (Exception e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-    }
-
-    class HandleSeacrh extends Handler {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case 111:
-
-                    break;
-
-                default:
-                    break;
-            }
-        }
-    }
-
-
 }

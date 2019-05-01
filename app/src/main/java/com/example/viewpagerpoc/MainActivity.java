@@ -130,11 +130,11 @@ public class MainActivity extends AppCompatActivity implements ZoneAFragmentRepl
                 break;
 
             case BLUETOOTH_SEARCH_FRAGMENT:
-                fragment = new BluetoothPhoneConnectFragment();
+                fragment = new BluetoothSearchFragment();
                 break;
 
             case BLUETOOTH_PHONE_CONNECT_FRAGMENT:
-                fragment = new BluetoothSearchFragment();
+                fragment = new BluetoothPhoneConnectFragment();
                 break;
 
             case NAVIGATION_FRAGMENT:

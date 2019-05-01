@@ -117,7 +117,7 @@ public class BluetoothFragmentOld extends Fragment {
                 if(isBonded)
                 {
                     //arrayListpaired.add(bdDevice.getName()+"\n"+bdDevice.getAddress());
-                    //adapter.notifyDataSetChanged();
+                    //pairedAdapter.notifyDataSetChanged();
                     getPairedDevices();
                     adapter.notifyDataSetChanged();
                 }
@@ -157,7 +157,7 @@ public class BluetoothFragmentOld extends Fragment {
                     if(isBonded)
                     {
                         arrayListpaired.add(bdDevice.getName()+"\n"+bdDevice.getAddress());
-                        adapter.notifyDataSetChanged();
+                        pairedAdapter.notifyDataSetChanged();
                     }
                 } catch (Exception e) {
                     // TODO Auto-generated catch block
