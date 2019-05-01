@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -48,7 +49,20 @@ public class BluetoothSearchFragment extends BaseFragment {
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
         arrayListBluetoothDevices = new ArrayList<BluetoothDevice>();
-        detectedAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_single_choice);
+        //detectedAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_single_choice);
+
+
+        detectedAdapter = new ArrayAdapter<String>(mContext,
+                android.R.layout.simple_list_item_single_choice) {
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View view = super.getView(position, convertView, parent);
+                TextView text = (TextView) view.findViewById(android.R.id.text1);
+                text.setTextColor(Color.WHITE);
+                return view;
+            }
+        };
+
         listViewDetected.setAdapter(detectedAdapter);
         listItemClicked = new ListItemClicked();
         detectedAdapter.notifyDataSetChanged();
@@ -120,7 +134,7 @@ public class BluetoothSearchFragment extends BaseFragment {
             try {
                 boolean isBonded = createBond(bdDevice);
                 if (isBonded) {
-                    Toast.makeText(mContext, "device connected successfully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, "Device connected successfully", Toast.LENGTH_SHORT).show();
                     Bundle bundle = new Bundle();
                     zoneAFragmentReplaceCallbacks.updateFragment(ZoneAFragmentsEnum.BLUETOOTH_PHONE_CONNECT_FRAGMENT, bundle);
                 }

@@ -69,8 +69,12 @@
         android:gravity="center"
         android:text="Detected List"
         android:textColor="#FFFFFF"
-        android:textSize="15sp" />
+        android:textSize="25sp" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:background="@color/ash" />
     <ListView
         android:id="@+id/listViewDetected"
         android:layout_width="match_parent"

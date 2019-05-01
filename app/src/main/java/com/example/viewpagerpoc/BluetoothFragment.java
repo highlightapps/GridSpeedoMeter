@@ -3,6 +3,7 @@ package com.example.viewpagerpoc;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,6 +26,9 @@ public class BluetoothFragment extends BaseFragment {
     ListView listViewPaired;
     BluetoothAdapter bluetoothAdapter = null;
     ArrayAdapter<String> pairedAdapter;
+
+
+    BluetoothPairedAdapter bluetoothPairedAdapter;
     ArrayList<BluetoothDevice> arrayListPairedBluetoothDevices;
     ArrayList<String> arrayListpaired;
     ListItemClickedonPaired listItemClickedonPaired;
@@ -72,10 +76,29 @@ public class BluetoothFragment extends BaseFragment {
             }
         });
 
-        pairedAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_1, arrayListpaired);
-        listViewPaired.setAdapter(pairedAdapter);
+        // pairedAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_1, arrayListpaired);
+
+       // pairedAdapter = new ArrayAdapter<String>(mContext, R.layout.bluetooth_fragment_layout, arrayListpaired);
+
+
+       /* pairedAdapter = new ArrayAdapter<String>(mContext,
+                android.R.layout.simple_list_item_1, arrayListpaired) {
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View view = super.getView(position, convertView, parent);
+                TextView text = (TextView) view.findViewById(android.R.id.text1);
+                text.setTextColor(Color.WHITE);
+                return view;
+            }
+        }; */
+
+
+         bluetoothPairedAdapter = new BluetoothPairedAdapter(mContext, arrayListpaired);
+
+        listViewPaired.setAdapter(bluetoothPairedAdapter);
 
     }
+
 
     public boolean removeBond(BluetoothDevice btDevice)
             throws Exception {
@@ -104,7 +127,7 @@ public class BluetoothFragment extends BaseFragment {
                 }
             }
         }
-        pairedAdapter.notifyDataSetChanged();
+        bluetoothPairedAdapter.notifyDataSetChanged();
     }
 
     class ListItemClickedonPaired implements AdapterView.OnItemClickListener {
@@ -116,7 +139,7 @@ public class BluetoothFragment extends BaseFragment {
                 if (removeBonding) {
                     arrayListpaired.remove(position);
                     arrayListPairedBluetoothDevices.remove(position);
-                    pairedAdapter.notifyDataSetChanged();
+                    bluetoothPairedAdapter.notifyDataSetChanged();
                 }
 
 
