@@ -92,7 +92,11 @@ public class MainActivity extends AppCompatActivity implements ZoneAFragmentRepl
 
     @Override
     public void updateFragment(ZoneAFragmentsEnum zoneAFragmentsEnum) {
+        updateFragment(zoneAFragmentsEnum, null);
+    }
 
+    @Override
+    public void updateFragment(ZoneAFragmentsEnum zoneAFragmentsEnum, Bundle bundle) {
         if (currentZoneAFragment == zoneAFragmentsEnum) return;
         zoneAFragmentsEnumStack.push(currentZoneAFragment);
         currentZoneAFragment = zoneAFragmentsEnum;

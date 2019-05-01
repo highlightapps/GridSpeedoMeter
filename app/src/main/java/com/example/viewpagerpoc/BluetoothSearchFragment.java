@@ -121,7 +121,8 @@ public class BluetoothSearchFragment extends BaseFragment {
                 boolean isBonded = createBond(bdDevice);
                 if (isBonded) {
                     Toast.makeText(mContext, "device connected successfully", Toast.LENGTH_SHORT).show();
-                    zoneAFragmentReplaceCallbacks.updateFragment(ZoneAFragmentsEnum.BLUETOOTH_PHONE_CONNECT_FRAGMENT);
+                    Bundle bundle = new Bundle();
+                    zoneAFragmentReplaceCallbacks.updateFragment(ZoneAFragmentsEnum.BLUETOOTH_PHONE_CONNECT_FRAGMENT, bundle);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
