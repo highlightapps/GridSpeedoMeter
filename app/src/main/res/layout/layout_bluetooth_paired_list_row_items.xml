@@ -6,7 +6,7 @@
 
     <TextView
         android:id="@+id/txtPaired"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_centerVertical="true"
@@ -20,6 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="right"
+        android:visibility="gone"
         android:layout_toRightOf="@+id/txtPaired"
         android:layout_marginRight="20dp"
         android:orientation="horizontal">
