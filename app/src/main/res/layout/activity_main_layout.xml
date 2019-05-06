@@ -39,7 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:weightSum="1"
-        android:background="#412D86"
+        android:background="@drawable/sky_bg"
         android:orientation="horizontal">
 
         <FrameLayout
