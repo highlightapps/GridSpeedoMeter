@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 public class PhoneFragment extends BaseFragment {
     Context mContext;
@@ -19,6 +20,12 @@ public class PhoneFragment extends BaseFragment {
     }
 
     private void initViews(View view) {
-
+        Button btnContacts = view.findViewById(R.id.btnContacts);
+        btnContacts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                zoneAFragmentReplaceCallbacks.updateFragment(ZoneAFragmentsEnum.BLUETOOTH_PHONE_CONTACTS_FRAGMENT);
+            }
+        });
     }
 }

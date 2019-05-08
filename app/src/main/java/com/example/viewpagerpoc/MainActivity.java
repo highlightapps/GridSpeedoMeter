@@ -141,6 +141,10 @@ public class MainActivity extends AppCompatActivity implements ZoneAFragmentRepl
                 fragment = new BluetoothPhoneConnectFragment();
                 break;
 
+            case BLUETOOTH_PHONE_CONTACTS_FRAGMENT:
+                fragment = new PhoneContactsFragment();
+                break;
+
             case NAVIGATION_FRAGMENT:
                 fragment = new NavigationFragment();
                 break;
