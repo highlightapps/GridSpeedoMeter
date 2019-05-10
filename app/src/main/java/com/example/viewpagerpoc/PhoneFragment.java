@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class PhoneFragment extends BaseFragment {
     Context mContext;
@@ -27,5 +28,23 @@ public class PhoneFragment extends BaseFragment {
                 zoneAFragmentReplaceCallbacks.updateFragment(ZoneAFragmentsEnum.BLUETOOTH_PHONE_CONTACTS_FRAGMENT);
             }
         });
+
+        Button btnRecents = view.findViewById(R.id.btnRecents);
+        btnRecents.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                zoneAFragmentReplaceCallbacks.updateFragment(ZoneAFragmentsEnum.PHONE_RECENTS_FRAGMENT);
+            }
+        });
+
+        TextView txtMenu = view.findViewById(R.id.txtMenu);
+        txtMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                zoneAFragmentReplaceCallbacks.updateFragment(ZoneAFragmentsEnum.PHONE_MENU_FRAGMENT);
+            }
+        });
+
+
     }
 }

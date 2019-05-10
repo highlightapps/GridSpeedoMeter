@@ -145,6 +145,17 @@ public class MainActivity extends AppCompatActivity implements ZoneAFragmentRepl
                 fragment = new PhoneContactsFragment();
                 break;
 
+
+            case PHONE_RECENTS_FRAGMENT:
+                fragment = new PhoneRecentsFragment();
+                break;
+
+
+            case PHONE_MENU_FRAGMENT:
+                fragment = new PhoneMenuFragment();
+                break;
+
+
             case NAVIGATION_FRAGMENT:
                 fragment = new NavigationFragment();
                 break;
