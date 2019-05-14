@@ -42,7 +42,6 @@ public class PhoneContactsFragment extends BaseFragment {
     ArrayList<BluetoothDevice> availableDevices = new ArrayList();
     //BTDeviceAdapter availableDevicesDdapter = null;
     BluetoothAdapter bluetoothAdapter = null;
-    ArrayList<VCardEntry> contacts = new ArrayList();
     BluetoothDevice device = null;
     boolean retrieve_phone_contact = false;
     boolean retrieve_sim_contact = false;
@@ -65,7 +64,7 @@ public class PhoneContactsFragment extends BaseFragment {
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        phoneFragmentContactsAdapter = new PhoneFragmentContactsAdapter(contacts);
+        phoneFragmentContactsAdapter = new PhoneFragmentContactsAdapter(null);
         recyclerView.setAdapter(phoneFragmentContactsAdapter);
     }
 
@@ -199,6 +198,7 @@ public class PhoneContactsFragment extends BaseFragment {
             }
             if (!retrieve_phone_contact) {
                 retrieve_phone_contact = true;
+                ArrayList<VCardEntry> contacts = new ArrayList<>();
                 if (((ArrayList) msg.obj) != null) {
                     contacts.addAll((ArrayList) msg.obj);
                 }
@@ -210,6 +210,7 @@ public class PhoneContactsFragment extends BaseFragment {
             } else if (!retrieve_sim_contact) {
                 //hideProgressDialog();
                 retrieve_sim_contact = true;
+                ArrayList<VCardEntry> contacts = new ArrayList<>();
                 if (((ArrayList) msg.obj) != null) {
                     contacts.addAll((ArrayList) msg.obj);
                 }
@@ -229,11 +230,6 @@ public class PhoneContactsFragment extends BaseFragment {
                 retrieve_phone_contact = false;
                 retrieve_sim_contact = false;
                 contacts.clear();
-            }
-
-            if(contacts != null && !contacts.isEmpty()) {
-                phoneFragmentContactsAdapter.setContacts(contacts);
-                phoneFragmentContactsAdapter.notifyDataSetChanged();
             }
         }
     }
