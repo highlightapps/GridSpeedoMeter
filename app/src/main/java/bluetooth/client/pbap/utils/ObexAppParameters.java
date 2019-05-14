@@ -9,6 +9,10 @@ import javax.obex.HeaderSet;
 public final class ObexAppParameters {
     private final HashMap<Byte, byte[]> mParams = new HashMap();
 
+    public ObexAppParameters(){
+
+    }
+
     public ObexAppParameters(byte[] raw) {
         if (raw != null) {
             int i = 0;

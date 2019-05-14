@@ -5,12 +5,12 @@ import com.android.vcard.VCardEntry;
 import com.android.vcard.VCardEntry.EmailData;
 import com.android.vcard.VCardEntry.NameData;
 import com.android.vcard.VCardEntry.PhoneData;
-import com.anjlab.android.iab.v3.Constants;
-import com.google.android.gms.plus.PlusShare;
-import java.util.List;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
 
 public class BluetoothPbapCard {
     /* renamed from: N */
@@ -70,9 +70,9 @@ public class BluetoothPbapCard {
             if (phones != null) {
                 for (PhoneData phone : phones) {
                     JSONObject jsonPhone = new JSONObject();
-                    jsonPhone.put(Constants.RESPONSE_TYPE, phone.getType());
+                    jsonPhone.put("type", phone.getType());
                     jsonPhone.put("number", phone.getNumber());
-                    jsonPhone.put(PlusShare.KEY_CALL_TO_ACTION_LABEL, phone.getLabel());
+                    jsonPhone.put("label", phone.getLabel());
                     jsonPhone.put("is_primary", phone.isPrimary());
                     jsonPhones.put(jsonPhone);
                 }
@@ -86,9 +86,9 @@ public class BluetoothPbapCard {
             if (emails != null) {
                 for (EmailData email : emails) {
                     JSONObject jsonEmail = new JSONObject();
-                    jsonEmail.put(Constants.RESPONSE_TYPE, email.getType());
+                    jsonEmail.put("type", email.getType());
                     jsonEmail.put("address", email.getAddress());
-                    jsonEmail.put(PlusShare.KEY_CALL_TO_ACTION_LABEL, email.getLabel());
+                    jsonEmail.put("label", email.getLabel());
                     jsonEmail.put("is_primary", email.isPrimary());
                     jsonEmails.put(jsonEmail);
                 }

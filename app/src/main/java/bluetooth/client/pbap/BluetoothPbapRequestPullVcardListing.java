@@ -1,6 +1,6 @@
 package bluetooth.client.pbap;
 
-import android.bluetooth.client.pbap.utils.ObexAppParameters;
+import bluetooth.client.pbap.utils.ObexAppParameters;
 import android.util.Log;
 import java.io.IOException;
 import java.io.InputStream;

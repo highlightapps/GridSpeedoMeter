@@ -99,7 +99,7 @@ public class BluetoothPbapClient {
                 BluetoothPbapRequest req;
                 switch (msg.what) {
                     case 3:
-                        req = msg.obj;
+                        req = (BluetoothPbapRequest) msg.obj;
                         if (req instanceof BluetoothPbapRequestPullPhoneBookSize) {
                             client.sendToClient(5, ((BluetoothPbapRequestPullPhoneBookSize) req).getSize());
                             return;

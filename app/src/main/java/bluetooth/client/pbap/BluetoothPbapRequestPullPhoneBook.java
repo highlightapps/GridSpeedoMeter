@@ -1,6 +1,6 @@
 package bluetooth.client.pbap;
 
-import android.bluetooth.client.pbap.utils.ObexAppParameters;
+import bluetooth.client.pbap.utils.ObexAppParameters;
 import android.util.Log;
 import com.android.vcard.VCardEntry;
 import java.io.IOException;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import javax.obex.HeaderSet;
 
 final class BluetoothPbapRequestPullPhoneBook extends BluetoothPbapRequest {
-    private static final String TAG = "BluetoothPbapRequestPullPhoneBook";
+    private static final String TAG = "BPRPullPhoneBook";
     private static final String TYPE = "x-bt/phonebook";
     private final byte mFormat;
     private int mNewMissedCalls = -1;

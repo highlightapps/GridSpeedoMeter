@@ -41,7 +41,8 @@ public final class ObexTime {
         if (this.mDate == null) {
             return null;
         }
-        Calendar.getInstance().setTime(this.mDate);
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(this.mDate);
         return String.format(Locale.US, "%04d%02d%02dT%02d%02d%02d", new Object[]{Integer.valueOf(cal.get(1)), Integer.valueOf(cal.get(2) + 1), Integer.valueOf(cal.get(5)), Integer.valueOf(cal.get(11)), Integer.valueOf(cal.get(12)), Integer.valueOf(cal.get(13))});
     }
 }
