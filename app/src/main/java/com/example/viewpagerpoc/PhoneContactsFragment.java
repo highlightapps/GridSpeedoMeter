@@ -17,6 +17,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.android.vcard.VCardEntry;
 
@@ -50,10 +52,13 @@ public class PhoneContactsFragment extends BaseFragment {
     //Views
     private RecyclerView recyclerView;
     PhoneFragmentContactsAdapter phoneFragmentContactsAdapter;
+    String[] contactsSortType = {"First Name", "Last Name"};
+    Context mContext;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contacts, container, false);
+        mContext = getActivity();
         initLogic();
         initViews(view);
         return view;
@@ -61,6 +66,11 @@ public class PhoneContactsFragment extends BaseFragment {
 
     private void initViews(View view) {
         recyclerView = view.findViewById(R.id.my_recycler_view);
+
+        Spinner spinner = view.findViewById(R.id.spinner);
+        ArrayAdapter adapter = new ArrayAdapter(mContext, android.R.layout.simple_spinner_item, contactsSortType);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
@@ -68,7 +78,7 @@ public class PhoneContactsFragment extends BaseFragment {
         recyclerView.setAdapter(phoneFragmentContactsAdapter);
     }
 
-    private void initLogic(){
+    private void initLogic() {
         this.bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         requestAllPermissions();
         IntentFilter filter = new IntentFilter();
@@ -83,9 +93,9 @@ public class PhoneContactsFragment extends BaseFragment {
         //setupNearbyDeviceList();
         Set<BluetoothDevice> pairedDevices = BluetoothAdapter.getDefaultAdapter().getBondedDevices();
         if (pairedDevices.size() > 0) {
-            for (BluetoothDevice d: pairedDevices) {
+            for (BluetoothDevice d : pairedDevices) {
                 String deviceName = d.getName();
-                if(deviceName.equalsIgnoreCase("siddu jio")){
+                if (deviceName.equalsIgnoreCase("siddu jio")) { //TODO:: we need to check the device availability.
                     device = d;
                 }
             }
@@ -202,7 +212,7 @@ public class PhoneContactsFragment extends BaseFragment {
                 if (((ArrayList) msg.obj) != null) {
                     contacts.addAll((ArrayList) msg.obj);
                 }
-                if(contacts != null && !contacts.isEmpty()) {
+                if (contacts != null && !contacts.isEmpty()) {
                     phoneFragmentContactsAdapter.setContacts(contacts);
                     phoneFragmentContactsAdapter.notifyDataSetChanged();
                 }
