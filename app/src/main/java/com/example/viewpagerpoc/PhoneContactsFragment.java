@@ -19,6 +19,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.vcard.VCardEntry;
 
@@ -42,15 +44,14 @@ public class PhoneContactsFragment extends BaseFragment {
     private final BroadcastReceiver blueToothReceiver = new MyBroadcastReceiver();
     boolean action_app_disconnect = false;
     ArrayList<BluetoothDevice> availableDevices = new ArrayList();
-    //BTDeviceAdapter availableDevicesDdapter = null;
-    BluetoothAdapter bluetoothAdapter = null;
     BluetoothDevice device = null;
     boolean retrieve_phone_contact = false;
     boolean retrieve_sim_contact = false;
 
 
     //Views
-    private RecyclerView recyclerView;
+    RecyclerView recyclerView;
+    TextView txtBluetoothDevice;
     PhoneFragmentContactsAdapter phoneFragmentContactsAdapter;
     String[] contactsSortType = {"First Name", "Last Name"};
     Context mContext;
@@ -59,8 +60,8 @@ public class PhoneContactsFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contacts, container, false);
         mContext = getActivity();
-        initLogic();
         initViews(view);
+        initLogic();
         return view;
     }
 
@@ -76,10 +77,11 @@ public class PhoneContactsFragment extends BaseFragment {
         recyclerView.setLayoutManager(layoutManager);
         phoneFragmentContactsAdapter = new PhoneFragmentContactsAdapter(null);
         recyclerView.setAdapter(phoneFragmentContactsAdapter);
+
+        txtBluetoothDevice = view.findViewById(R.id.txtBluetoothDevice);
     }
 
     private void initLogic() {
-        this.bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         requestAllPermissions();
         IntentFilter filter = new IntentFilter();
         filter.addAction("android.bluetooth.device.action.FOUND");
@@ -93,16 +95,33 @@ public class PhoneContactsFragment extends BaseFragment {
         //setupNearbyDeviceList();
         Set<BluetoothDevice> pairedDevices = BluetoothAdapter.getDefaultAdapter().getBondedDevices();
         if (pairedDevices.size() > 0) {
-            for (BluetoothDevice d : pairedDevices) {
-                String deviceName = d.getName();
-                if (deviceName.equalsIgnoreCase("siddu jio")) { //TODO:: we need to check the device availability.
-                    device = d;
+            for (BluetoothDevice btDevice : pairedDevices) {
+                if(btDevice.getBondState() == BluetoothDevice.BOND_BONDED){
+                    String deviceName = btDevice.getName();
+                    Toast.makeText(getContext(), "Device is connected to the " + deviceName, Toast.LENGTH_SHORT).show();
+                    device = btDevice;
+                    break;
                 }
+                /*String deviceName = btDevice.getName();
+                if (deviceName.equalsIgnoreCase("siddu jio")) { //TODO:: we need to check the device availability.
+                    device = btDevice;
+                }*/
             }
         }
 
-        sPbapClient = new BluetoothPbapClient(device, new BluetoothServiceHandler());
-        sPbapClient.connect();
+        String deviceName = null;
+        if(device != null) {
+            deviceName = device.getName();
+            sPbapClient = new BluetoothPbapClient(device, new BluetoothServiceHandler());
+            sPbapClient.connect();
+        }
+        else {
+            deviceName = "No BT Device";
+            Toast.makeText(getContext(), "Device is not connected with any bluetooth device, Please connect it the bluetooth device.", Toast.LENGTH_SHORT).show();
+        }
+
+        txtBluetoothDevice.setText("Contacts  (" + deviceName + ")");
+
     }
 
     class MyBroadcastReceiver extends BroadcastReceiver {
@@ -166,13 +185,14 @@ public class PhoneContactsFragment extends BaseFragment {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case EVENT_PULL_PHONE_BOOK_DONE:
+                    Toast.makeText(getContext(), "Contacts retrieved successfully..", Toast.LENGTH_SHORT).show();
                     break;
                 case EVENT_PULL_PHONE_BOOK_ERROR:
                     //hideProgressDialog();
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            //DialogUtility.showDialog(this, getString(C0938R.string.connection_failed));
+                            Toast.makeText(getContext(), "Contacts retrieving failed, connection issue..", Toast.LENGTH_SHORT).show();
                         }
                     });
                     break;
@@ -182,13 +202,13 @@ public class PhoneContactsFragment extends BaseFragment {
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                //DialogUtility.showDialog(this, getString(C0938R.string.connection_failed));
+                                Toast.makeText(getContext(), "Unable to establish connection with the device..", Toast.LENGTH_SHORT).show();
                             }
                         });
                         return;
                     }
                     sPbapClient.pullPhoneBook(BluetoothPbapClient.PB_PATH);
-                    //showProgressDialog(getString(C0938R.string.retriving_contacts));
+                    Toast.makeText(getContext(), "Retrieving contacts, please wait..", Toast.LENGTH_SHORT).show();
                     return;
                 case EVENT_SESSION_DISCONNECTED:
                     if (action_app_disconnect) {
@@ -199,7 +219,7 @@ public class PhoneContactsFragment extends BaseFragment {
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            // DialogUtility.showDialog(this, getString(C0938R.string.connection_failed));
+                            Toast.makeText(getContext(), "disconnected the session from the device..", Toast.LENGTH_SHORT).show();
                         }
                     });
                     return;
