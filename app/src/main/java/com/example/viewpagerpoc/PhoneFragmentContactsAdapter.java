@@ -13,10 +13,12 @@ import java.util.ArrayList;
 
 public class PhoneFragmentContactsAdapter extends RecyclerView.Adapter<PhoneFragmentContactsAdapter.ContactsViewHolder> {
 
-    ArrayList<VCardEntry> contacts;
+    public static ArrayList<VCardEntry> contacts;
+    public static AdapterOnItemClickListener adapterOnItemClickListener;
 
-    public PhoneFragmentContactsAdapter(ArrayList<VCardEntry> contacts){
+    public PhoneFragmentContactsAdapter(ArrayList<VCardEntry> contacts, AdapterOnItemClickListener adapterOnItemClickListener){
         this.contacts = contacts;
+        this.adapterOnItemClickListener = adapterOnItemClickListener;
     }
 
     @NonNull
@@ -46,6 +48,14 @@ public class PhoneFragmentContactsAdapter extends RecyclerView.Adapter<PhoneFrag
         public ContactsViewHolder(View v) {
             super(v);
             textViewContactName = v.findViewById(R.id.tvContactName);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(adapterOnItemClickListener != null){
+                        adapterOnItemClickListener.onItemClickListener(getAdapterPosition());
+                    }
+                }
+            });
         }
     }
 }

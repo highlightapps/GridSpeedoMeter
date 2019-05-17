@@ -2,7 +2,6 @@ package com.example.viewpagerpoc;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -101,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements ZoneAFragmentRepl
         zoneAFragmentsEnumStack.push(currentZoneAFragment);
         currentZoneAFragment = zoneAFragmentsEnum;
 
-        replaceFragment(zoneAFragmentsEnum);
+        replaceFragment(zoneAFragmentsEnum, bundle);
     }
 
 
@@ -117,10 +116,10 @@ public class MainActivity extends AppCompatActivity implements ZoneAFragmentRepl
         if (currentZoneAFragment == zoneAFragmentsEnum) return;
         currentZoneAFragment = zoneAFragmentsEnum;
 
-        replaceFragment(zoneAFragmentsEnum);
+        replaceFragment(zoneAFragmentsEnum, null);
     }
 
-    public void replaceFragment(ZoneAFragmentsEnum zoneAFragmentsEnum) {
+    public void replaceFragment(ZoneAFragmentsEnum zoneAFragmentsEnum, Bundle bundle) {
 
         BaseFragment fragment = null;
         switch (zoneAFragmentsEnum) {
@@ -141,10 +140,13 @@ public class MainActivity extends AppCompatActivity implements ZoneAFragmentRepl
                 fragment = new BluetoothPhoneConnectFragment();
                 break;
 
-            case BLUETOOTH_PHONE_CONTACTS_FRAGMENT:
+            case PHONE_CONTACTS_FRAGMENT:
                 fragment = new PhoneContactsFragment();
                 break;
 
+            case PHONE_CONTACTS_DETAIL_FRAGMENT:
+                fragment = new PhoneContactDetailsFragment();
+                break;
 
             case PHONE_RECENTS_FRAGMENT:
                 fragment = new PhoneRecentsFragment();
@@ -182,6 +184,9 @@ public class MainActivity extends AppCompatActivity implements ZoneAFragmentRepl
         }
 
         if(fragment != null) {
+            if (bundle != null) {
+                fragment.setArguments(bundle);
+            }
             fragment.setZoneAFragmentReplaceCallbacks(this);
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragmentZoneA, fragment);

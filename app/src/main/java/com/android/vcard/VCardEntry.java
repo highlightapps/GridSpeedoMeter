@@ -16,8 +16,6 @@
 
 package com.android.vcard;
 
-import com.android.vcard.VCardUtils.PhoneNumberUtilsPort;
-
 import android.accounts.Account;
 import android.content.ContentProviderOperation;
 import android.content.ContentResolver;
@@ -43,6 +41,9 @@ import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.android.vcard.VCardUtils.PhoneNumberUtilsPort;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -117,7 +118,7 @@ public class VCardEntry {
     // FN;PREF=1:John M. Doe
     // FN;PREF=2:John Doe
     // FN;PREF=3;John
-    public static class NameData implements EntryElement {
+    public static class NameData implements EntryElement, Serializable {
         private String mFamily;
         private String mGiven;
         private String mMiddle;
