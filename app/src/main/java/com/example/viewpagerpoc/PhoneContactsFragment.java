@@ -65,7 +65,7 @@ public class PhoneContactsFragment extends BaseFragment implements AdapterOnItem
         recyclerView = view.findViewById(R.id.my_recycler_view);
 
         Spinner spinner = view.findViewById(R.id.spinner);
-        ArrayAdapter adapter = new ArrayAdapter(mContext, android.R.layout.simple_spinner_item, contactsSortType);
+        ArrayAdapter adapter = new ArrayAdapter(mContext, R.layout.phone_contacts_sort_spinner_item, contactsSortType);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
