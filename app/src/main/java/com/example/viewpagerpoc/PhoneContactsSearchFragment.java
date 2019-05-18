@@ -4,9 +4,11 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.vcard.VCardEntry;
@@ -32,13 +34,38 @@ public class PhoneContactsSearchFragment extends BaseFragment implements Adapter
     }
 
     private void initViews(View view) {
-        recyclerView = view.findViewById(R.id.my_recycler_view);
+        searchView(view);
 
+        recyclerView = view.findViewById(R.id.my_recycler_view);
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         phoneFragmentContactsAdapter = new PhoneFragmentContactsAdapter(null, this);
         recyclerView.setAdapter(phoneFragmentContactsAdapter);
+    }
+
+    private void searchView(View view) {
+        SearchView searchView = view.findViewById(R.id.searchView);
+        EditText searchEditText = searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+        searchEditText.setTextColor(getResources().getColor(R.color.white));
+        searchEditText.setHintTextColor(getResources().getColor(R.color.white));
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                performSearch(s);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return true;
+            }
+        });
+    }
+
+    private void performSearch(String s) {
+
     }
 
     @Override

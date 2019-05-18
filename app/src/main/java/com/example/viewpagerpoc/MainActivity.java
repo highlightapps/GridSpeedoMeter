@@ -26,12 +26,14 @@ public class MainActivity extends AppCompatActivity implements ZoneAFragmentRepl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_layout);
 
-        ImageView imgHome = (ImageView) findViewById(R.id.imgHome);
-        ImageView imgBack = (ImageView) findViewById(R.id.imgBack);
+        ImageView imgHome = findViewById(R.id.imgHome);
+        ImageView imgBack = findViewById(R.id.imgBack);
         imgHome.setOnClickListener(this);
         imgBack.setOnClickListener(this);
 
-        ZoneAFragment zoneAFragment = new ZoneAFragment();
+        BaseFragment zoneAFragment = new ZoneAFragment();
+        //For Testing : Launch the fragment directly..
+        zoneAFragment = new PhoneContactsSearchFragment();
         zoneAFragment.setZoneAFragmentReplaceCallbacks(this);
 
         ZoneBFragment zoneBFragment = new ZoneBFragment();
@@ -39,8 +41,8 @@ public class MainActivity extends AppCompatActivity implements ZoneAFragmentRepl
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
 
-        transaction.add(R.id.fragmentZoneA, zoneAFragment, "zone_a_fragment_tag");
-        transaction.add(R.id.fragmentZoneB, zoneBFragment, "zone_b_fragment_tag");
+        transaction.add(R.id.fragmentZoneA, zoneAFragment);
+        transaction.add(R.id.fragmentZoneB, zoneBFragment);
 
         transaction.commit();
 
@@ -104,10 +106,9 @@ public class MainActivity extends AppCompatActivity implements ZoneAFragmentRepl
     }
 
 
-
     @Override
     public void goBackToPreviousFragment() {
-        if(zoneAFragmentsEnumStack.empty()) {
+        if (zoneAFragmentsEnumStack.empty()) {
             finish();
             return;
         }
@@ -186,7 +187,7 @@ public class MainActivity extends AppCompatActivity implements ZoneAFragmentRepl
                 break;
         }
 
-        if(fragment != null) {
+        if (fragment != null) {
             if (bundle != null) {
                 fragment.setArguments(bundle);
             }
