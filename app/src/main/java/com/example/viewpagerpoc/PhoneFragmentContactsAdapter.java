@@ -47,6 +47,7 @@ public class PhoneFragmentContactsAdapter extends RecyclerView.Adapter<PhoneFrag
     public void setContacts(ArrayList<VCardEntry> contacts){
         this.contactList = contacts;
         this.contactListFiltered = contacts;
+        notifyDataSetChanged();
     }
 
     @Override

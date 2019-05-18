@@ -3,7 +3,6 @@ package com.example.viewpagerpoc;
 import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -22,6 +22,8 @@ import android.widget.Toast;
 import com.android.vcard.VCardEntry;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Set;
 
 import bluetooth.client.pbap.BluetoothPbapClient;
@@ -33,48 +35,41 @@ import static bluetooth.client.pbap.BluetoothPbapClient.EVENT_SESSION_DISCONNECT
 
 public class PhoneContactsFragment extends BaseFragment implements AdapterOnItemClickListener{
 
-    protected static final int PERMISSIONS_REQUEST_ALL_PERMISSIONS = 1;
-    private static final int REQUEST_ENABLE_BT = 0;
     public static BluetoothPbapClient sPbapClient = null;
     boolean action_app_disconnect = false;
-    ArrayList<BluetoothDevice> availableDevices = new ArrayList();
     BluetoothDevice device = null;
     boolean retrieve_phone_contact = false;
-    boolean retrieve_sim_contact = false;
 
     ArrayList<VCardEntry> contacts = new ArrayList<>();
 
+    boolean isSortByFirstName = true;
 
     //Views
     RecyclerView recyclerView;
     TextView txtBluetoothDevice;
     PhoneFragmentContactsAdapter phoneFragmentContactsAdapter;
     String[] contactsSortType = {"First Name", "Last Name"};
-    Context mContext;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contacts, container, false);
-        mContext = getActivity();
+        checkBluetoothIsEnabled();
         initViews(view);
         initLogic();
         return view;
     }
 
     private void initViews(View view) {
-        recyclerView = view.findViewById(R.id.my_recycler_view);
 
-        Spinner spinner = view.findViewById(R.id.spinner);
-        ArrayAdapter adapter = new ArrayAdapter(mContext, R.layout.phone_contacts_sort_spinner_item, contactsSortType);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        initSpinner(view);
+
+        recyclerView = view.findViewById(R.id.my_recycler_view);
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         phoneFragmentContactsAdapter = new PhoneFragmentContactsAdapter(null, this);
         recyclerView.setAdapter(phoneFragmentContactsAdapter);
         txtBluetoothDevice = view.findViewById(R.id.txtBluetoothDevice);
-
 
         TextView txtSearchList = view.findViewById(R.id.txtSearchList);
         txtSearchList.setOnClickListener(new View.OnClickListener() {
@@ -85,6 +80,40 @@ public class PhoneContactsFragment extends BaseFragment implements AdapterOnItem
                 zoneAFragmentReplaceCallbacks.updateFragment(ZoneAFragmentsEnum.PHONE_CONTACTS_SEARCH_FRAGMENT, bundle);
             }
         });
+    }
+
+    private void initSpinner(View view) {
+        Spinner spinner = view.findViewById(R.id.spinner);
+        ArrayAdapter adapter = new ArrayAdapter(getActivity(), R.layout.phone_contacts_sort_spinner_item, contactsSortType);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                isSortByFirstName = (position == 0);
+                sortContactsByNamePreference();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+            }
+
+        });
+    }
+
+    private void sortContactsByNamePreference() {
+        Comparator<VCardEntry> compareByName = null;
+
+        if(isSortByFirstName){
+            //First name sorter
+            compareByName = Comparator.nullsLast((o1, o2) -> o1.getNameData().getGiven().compareTo(o2.getNameData().getGiven()));
+        }
+        else {
+            //Last name sorter
+            compareByName = Comparator.nullsLast((o1, o2) -> o1.getNameData().getFamily().compareTo(o2.getNameData().getFamily()));
+        }
+        Collections.sort(contacts, compareByName);
+        phoneFragmentContactsAdapter.setContacts(contacts);
     }
 
     private void initLogic() {
@@ -104,7 +133,7 @@ public class PhoneContactsFragment extends BaseFragment implements AdapterOnItem
         String deviceName = null;
         if(device != null) {
             deviceName = device.getName();
-            connectToPhonebook(device);
+            connectToPhoneBook(device);
         }
         else {
             deviceName = "No BT Device";
@@ -133,7 +162,6 @@ public class PhoneContactsFragment extends BaseFragment implements AdapterOnItem
                     Toast.makeText(getContext(), "Contacts retrieved successfully..", Toast.LENGTH_SHORT).show();
                     break;
                 case EVENT_PULL_PHONE_BOOK_ERROR:
-                    //hideProgressDialog();
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -142,7 +170,6 @@ public class PhoneContactsFragment extends BaseFragment implements AdapterOnItem
                     });
                     break;
                 case EVENT_SESSION_CONNECTED:
-                    //hideProgressDialog();
                     if (sPbapClient == null || sPbapClient.getState() != BluetoothPbapClient.ConnectionState.CONNECTED) {
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
@@ -160,7 +187,6 @@ public class PhoneContactsFragment extends BaseFragment implements AdapterOnItem
                         action_app_disconnect = false;
                         return;
                     }
-                    //hideProgressDialog();
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -178,24 +204,30 @@ public class PhoneContactsFragment extends BaseFragment implements AdapterOnItem
                 }
                 if (contacts != null && !contacts.isEmpty()) {
                     phoneFragmentContactsAdapter.setContacts(contacts);
-                    phoneFragmentContactsAdapter.notifyDataSetChanged();
                 }
-                //sPbapClient.pullPhoneBook(BluetoothPbapClient.SIM_PB_PATH);
                 action_app_disconnect = true;
-                sPbapClient.disconnect();
+                disconnectFromPhoneBook();
             }
         }
     }
 
-    public void connectToPhonebook(BluetoothDevice device) {
+    public void connectToPhoneBook(BluetoothDevice device) {
         sPbapClient = null;
         sPbapClient = new BluetoothPbapClient(device, new BluetoothServiceHandler());
         sPbapClient.connect();
     }
 
-    public void disconnectFromPhonebook() {
+    public void disconnectFromPhoneBook() {
         if (sPbapClient != null) {
             sPbapClient.disconnect();
+        }
+    }
+
+    private void checkBluetoothIsEnabled() {
+        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if(!bluetoothAdapter.isEnabled())
+        {
+            Toast.makeText(getActivity(), "Bluetooth turn on the bluetooth.", Toast.LENGTH_LONG).show();
         }
     }
 
