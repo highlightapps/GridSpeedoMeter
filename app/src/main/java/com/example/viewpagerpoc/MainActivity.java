@@ -124,7 +124,6 @@ public class MainActivity extends AppCompatActivity implements ZoneAFragmentRepl
         BaseFragment fragment = null;
         switch (zoneAFragmentsEnum) {
             case BLUETOOTH_FRAGMENT:
-
                 fragment = new BluetoothFragment();
                 break;
 
@@ -146,6 +145,10 @@ public class MainActivity extends AppCompatActivity implements ZoneAFragmentRepl
 
             case PHONE_CONTACTS_DETAIL_FRAGMENT:
                 fragment = new PhoneContactDetailsFragment();
+                break;
+
+            case PHONE_CONTACTS_SEARCH_FRAGMENT:
+                fragment = new PhoneContactsSearchFragment();
                 break;
 
             case PHONE_RECENTS_FRAGMENT:
@@ -194,5 +197,11 @@ public class MainActivity extends AppCompatActivity implements ZoneAFragmentRepl
             fragmentTransaction.commit();
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        goBackToPreviousFragment();
     }
 }

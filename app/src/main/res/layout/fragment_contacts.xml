@@ -13,55 +13,69 @@
             android:id="@+id/txtBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text=">"
             android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:text=">"
             android:textColor="#FFFFFF"
-            android:textSize="40sp" />
+            android:textSize="30sp" />
 
         <TextView
             android:id="@+id/txtBluetoothDevice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="40dp"
-            android:drawablePadding="8dp"
+            android:layout_toRightOf="@+id/txtBack"
             android:text="Contacts"
             android:textColor="#FFFFFF"
-            android:textSize="25sp" />
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/txtSearchList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="5dp"
+            android:layout_toStartOf="@+id/spinnerDivider"
+            android:drawableStart="@drawable/ic_search_white_24dp"
+            android:drawablePadding="5dp"
+            android:text="Search\nList"
+            android:textAllCaps="true"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp" />
 
         <View
+            android:id="@+id/spinnerDivider"
             android:layout_width="1.5dp"
             android:layout_height="50dp"
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/spinner"
+            android:layout_toStartOf="@+id/spinner"
             android:background="@color/ash" />
 
 
         <Spinner
             android:id="@+id/spinner"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_centerInParent="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="20dp"
-            android:layout_height="wrap_content"/>
-
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:backgroundTint="#FFFFFF" />
 
     </RelativeLayout>
 
     <View
+        android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="1.5dp"
-        android:id="@+id/view"
         android:layout_below="@+id/headerSection"
         android:background="@color/ash" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/my_recycler_view"
-        android:layout_below="@+id/view"
-        android:scrollbars="vertical"
-        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_below="@+id/view"
+        android:layout_marginTop="10dp"
+        android:scrollbars="vertical" />
 </RelativeLayout>
