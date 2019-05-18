@@ -65,7 +65,7 @@ import java.util.Map;
  * Contacts representation. Those raw properties should _not_ be used for
  * {@link #isIgnorable()}.
  */
-public class VCardEntry {
+public class VCardEntry implements Serializable{
     private static final String LOG_TAG = VCardConstants.LOG_TAG;
 
     private static final int DEFAULT_ORGANIZATION_TYPE = Organization.TYPE_WORK;

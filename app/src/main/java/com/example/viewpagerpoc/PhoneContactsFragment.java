@@ -81,7 +81,7 @@ public class PhoneContactsFragment extends BaseFragment implements AdapterOnItem
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-                bundle.putString("contactList", null);
+                bundle.putSerializable("contactList", contacts);
                 zoneAFragmentReplaceCallbacks.updateFragment(ZoneAFragmentsEnum.PHONE_CONTACTS_SEARCH_FRAGMENT, bundle);
             }
         });

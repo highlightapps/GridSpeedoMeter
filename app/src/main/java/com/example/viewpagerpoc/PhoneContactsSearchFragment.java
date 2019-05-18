@@ -1,6 +1,5 @@
 package com.example.viewpagerpoc;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.android.vcard.VCardEntry;
 
@@ -21,16 +19,21 @@ public class PhoneContactsSearchFragment extends BaseFragment implements Adapter
 
     //Views
     RecyclerView recyclerView;
-    TextView txtBluetoothDevice;
     PhoneFragmentContactsAdapter phoneFragmentContactsAdapter;
-    Context mContext;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contact_search, container, false);
-        mContext = getActivity();
+        readBundle();
         initViews(view);
         return view;
+    }
+
+    private void readBundle() {
+        Bundle bundle = getArguments();
+        if(bundle != null){
+            contacts = (ArrayList<VCardEntry>) bundle.getSerializable("contactList");
+        }
     }
 
     private void initViews(View view) {
@@ -40,7 +43,7 @@ public class PhoneContactsSearchFragment extends BaseFragment implements Adapter
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        phoneFragmentContactsAdapter = new PhoneFragmentContactsAdapter(null, this);
+        phoneFragmentContactsAdapter = new PhoneFragmentContactsAdapter(contacts, this);
         recyclerView.setAdapter(phoneFragmentContactsAdapter);
     }
 
@@ -59,13 +62,14 @@ public class PhoneContactsSearchFragment extends BaseFragment implements Adapter
 
             @Override
             public boolean onQueryTextChange(String s) {
+                performSearch(s);
                 return true;
             }
         });
     }
 
     private void performSearch(String s) {
-
+        phoneFragmentContactsAdapter.getFilter().filter(s);
     }
 
     @Override

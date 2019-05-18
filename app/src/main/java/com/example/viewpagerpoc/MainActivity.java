@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements ZoneAFragmentRepl
 
         BaseFragment zoneAFragment = new ZoneAFragment();
         //For Testing : Launch the fragment directly..
-        zoneAFragment = new PhoneContactsSearchFragment();
+        //zoneAFragment = new PhoneContactsFragment();
         zoneAFragment.setZoneAFragmentReplaceCallbacks(this);
 
         ZoneBFragment zoneBFragment = new ZoneBFragment();

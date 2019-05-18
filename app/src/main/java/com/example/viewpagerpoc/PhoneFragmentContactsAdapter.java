@@ -5,19 +5,24 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.android.vcard.VCardEntry;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class PhoneFragmentContactsAdapter extends RecyclerView.Adapter<PhoneFragmentContactsAdapter.ContactsViewHolder> {
+public class PhoneFragmentContactsAdapter extends RecyclerView.Adapter<PhoneFragmentContactsAdapter.ContactsViewHolder> implements Filterable {
 
-    public static ArrayList<VCardEntry> contacts;
-    public static AdapterOnItemClickListener adapterOnItemClickListener;
+    public List<VCardEntry> contactList;
+    public List<VCardEntry> contactListFiltered;
+    public AdapterOnItemClickListener adapterOnItemClickListener;
 
     public PhoneFragmentContactsAdapter(ArrayList<VCardEntry> contacts, AdapterOnItemClickListener adapterOnItemClickListener){
-        this.contacts = contacts;
+        this.contactList = contacts;
+        this.contactListFiltered = contacts;
         this.adapterOnItemClickListener = adapterOnItemClickListener;
     }
 
@@ -31,19 +36,56 @@ public class PhoneFragmentContactsAdapter extends RecyclerView.Adapter<PhoneFrag
 
     @Override
     public void onBindViewHolder(@NonNull ContactsViewHolder myViewHolder, int position) {
-        myViewHolder.textViewContactName.setText(contacts.get(position).getDisplayName());
+        myViewHolder.textViewContactName.setText(contactListFiltered.get(position).getDisplayName());
     }
 
     @Override
     public int getItemCount() {
-        return contacts != null ? contacts.size() : 0;
+        return contactListFiltered != null ? contactListFiltered.size() : 0;
     }
 
     public void setContacts(ArrayList<VCardEntry> contacts){
-        this.contacts = contacts;
+        this.contactList = contacts;
+        this.contactListFiltered = contacts;
     }
 
-    public static class ContactsViewHolder extends RecyclerView.ViewHolder {
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String charString = charSequence.toString();
+                if (charString.isEmpty()) {
+                    contactListFiltered = contactList;
+                } else {
+                    List<VCardEntry> filteredList = new ArrayList<>();
+                    for (VCardEntry row : contactList) {
+
+                        // name match condition. this might differ depending on requirement
+                        // here we are looking for display name
+                        if (row.getDisplayName().toLowerCase().startsWith(charString.toLowerCase())) {
+                                //|| row.getPhone().contains(charSequence)) {
+                            filteredList.add(row);
+                        }
+                    }
+
+                    contactListFiltered = filteredList;
+                }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = contactListFiltered;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                contactListFiltered = (ArrayList<VCardEntry>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
+    }
+
+    public class ContactsViewHolder extends RecyclerView.ViewHolder {
         public TextView textViewContactName;
         public ContactsViewHolder(View v) {
             super(v);
