@@ -74,6 +74,17 @@ public class PhoneContactsFragment extends BaseFragment implements AdapterOnItem
         phoneFragmentContactsAdapter = new PhoneFragmentContactsAdapter(null, this);
         recyclerView.setAdapter(phoneFragmentContactsAdapter);
         txtBluetoothDevice = view.findViewById(R.id.txtBluetoothDevice);
+
+
+        TextView txtSearchList = view.findViewById(R.id.txtSearchList);
+        txtSearchList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("contactList", null);
+                zoneAFragmentReplaceCallbacks.updateFragment(ZoneAFragmentsEnum.PHONE_CONTACTS_SEARCH_FRAGMENT, bundle);
+            }
+        });
     }
 
     private void initLogic() {

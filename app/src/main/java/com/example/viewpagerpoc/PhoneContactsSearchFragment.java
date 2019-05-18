@@ -25,7 +25,7 @@ public class PhoneContactsSearchFragment extends BaseFragment implements Adapter
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_contacts, container, false);
+        View view = inflater.inflate(R.layout.fragment_contact_search, container, false);
         mContext = getActivity();
         initViews(view);
         return view;
