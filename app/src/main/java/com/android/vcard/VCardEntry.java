@@ -119,10 +119,10 @@ public class VCardEntry implements Serializable{
     // FN;PREF=2:John Doe
     // FN;PREF=3;John
     public static class NameData implements EntryElement, Serializable {
-        private String mFamily = "";
-        private String mGiven = "";
+        private String mFamily = ""; // last name
+        private String mGiven = ""; // first name
         private String mMiddle = "";
-        private String mPrefix = "";
+        private String mPrefix = ""; // mr. mrs,
         private String mSuffix = "";
 
         // Used only when no family nor given name is found.

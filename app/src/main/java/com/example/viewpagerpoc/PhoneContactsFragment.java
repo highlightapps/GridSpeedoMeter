@@ -75,6 +75,10 @@ public class PhoneContactsFragment extends BaseFragment implements AdapterOnItem
         txtSearchList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(contacts.isEmpty()){
+                    Toast.makeText(getActivity(), "No contacts available", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("contactList", contacts);
                 zoneAFragmentReplaceCallbacks.updateFragment(ZoneAFragmentsEnum.PHONE_CONTACTS_SEARCH_FRAGMENT, bundle);
@@ -227,7 +231,7 @@ public class PhoneContactsFragment extends BaseFragment implements AdapterOnItem
         BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if(!bluetoothAdapter.isEnabled())
         {
-            Toast.makeText(getActivity(), "Bluetooth turn on the bluetooth.", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "Please turn on the bluetooth.", Toast.LENGTH_LONG).show();
         }
     }
 
