@@ -1,1 +1,3 @@
-adaffad
+public void main() {
+
+}
