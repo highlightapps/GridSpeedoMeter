@@ -2,4 +2,10 @@ This is a test message for training.
 
 
 public void testCode() {
+
+int a =0;
+
+int b = 0;
+
+int c = a+b;
 }
