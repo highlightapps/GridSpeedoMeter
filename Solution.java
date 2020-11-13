@@ -11,4 +11,8 @@ class Solution {
 	}
 	
 	
+	public int substract() {
+		return a-b;
+	}
+	
 }
