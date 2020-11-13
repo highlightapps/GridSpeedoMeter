@@ -6,5 +6,9 @@ class Solution {
 		return a+b;
 	}
 	
+	public int multiply() {
+		return a * b;
+	}
+	
 	
 }
