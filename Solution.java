@@ -14,4 +14,9 @@ class Solution {
 		return "Test Name";
 	}
 	
+	
+	public String getCity() {
+		return "Hyderabad";
+	}
+	
 }
