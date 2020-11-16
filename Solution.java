@@ -19,4 +19,8 @@ class Solution {
 		return "Hyderabad";
 	}
 	
+	public String getCountry() {
+		return "India";
+	}
+	
 }
