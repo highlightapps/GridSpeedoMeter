@@ -10,5 +10,8 @@ class Solution {
 		return a * b;
 	}
 	
+	public String getName() {
+		return "Test Name";
+	}
 	
 }
