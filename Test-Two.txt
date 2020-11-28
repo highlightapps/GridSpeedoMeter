@@ -5,3 +5,9 @@ void addNewMethod() {
 
 
 }
+
+
+void addNewMethod2() {
+
+
+}
