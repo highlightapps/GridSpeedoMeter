@@ -1,0 +1,75 @@
+{
+	"callData": [{
+			"name": "Aman Platinus RK Team",
+			"urlProfilePic": "https://support.hubstaff.com/wp-content/uploads/2019/08/good-pic.png",
+			"time": "November 25, 9.01 PM",
+			"count": 1,
+			"call": "Outgoing",
+			"phoneNumber": null,
+			"callType": "VoiceCall"
+		},
+		{
+			"name": "Aman Platinus RK Team",
+			"urlProfilePic": "https://support.hubstaff.com/wp-content/uploads/2019/08/good-pic.png",
+			"time": "November 25, 9.01 PM",
+			"count": 1,
+			"call": "Incoming",
+			"phoneNumber": null,
+			"callType": "VoiceCall"
+		},
+		{
+			"name": "Jio Home",
+			"urlProfilePic": "https://support.hubstaff.com/wp-content/uploads/2019/08/good-pic.png",
+			"time": "November 25, 9.49 AM",
+			"count": 1,
+			"call": "Incoming",
+			"PhoneNumber": null,
+			"callType": "VoiceCall"
+		},
+		{
+			"name": "Suresh Platinus Resume Session",
+			"urlProfilePic": "https://support.hubstaff.com/wp-content/uploads/2019/08/good-pic.png",
+			"time": "november 24, 11.14 PM",
+			"count": 2,
+			"call": "incoming",
+			"PhoneNumber": null,
+			"callType": "voiceCall"
+		},
+		{
+			"name": "Surekha Traning",
+			"urlProfilePic": "https://support.hubstaff.com/wp-content/uploads/2019/08/good-pic.png",
+			"time": "November 24, 7.38PM PM",
+			"count": 2,
+			"call": "Incoming",
+			"PhoneNumber": null,
+			"callType": "VoiceCall"
+		},
+		{
+			"name": "BK Rdk",
+			"urlProfilePic": "https://support.hubstaff.com/wp-content/uploads/2019/08/good-pic.png",
+			"time": "November 25, 9.01 PM",
+			"count": 1,
+			"call": "Incoming",
+			"PhoneNumber": null,
+			"callType": "VideoCall"
+		},
+		{
+			"name": null,
+			"urlProfilePic": "https://support.hubstaff.com/wp-content/uploads/2019/08/good-pic.png",
+			"time": "November 25, 9.01 PM",
+			"count": 1,
+			"call": "Incoming",
+			"PhoneNumber": "+1 (302) 438-0338",
+			"callType": "VoiceCall"
+		},
+		{
+			"name": "Dhanraj Platinus",
+			"urlProfilePic": "https://support.hubstaff.com/wp-content/uploads/2019/08/good-pic.png",
+			"time": "November 25, 9.01 PM",
+			"count": 1,
+			"call": "MissedCall",
+			"PhoneNumber": null,
+			"callType": "VoiceCall"
+		}
+	]
+}
