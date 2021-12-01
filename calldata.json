@@ -13,7 +13,7 @@
 			"urlProfilePic": "https://support.hubstaff.com/wp-content/uploads/2019/08/good-pic.png",
 			"time": "November 25, 9.01 PM",
 			"count": 1,
-			"call": "Incoming",
+			"call": "MissedCall",
 			"phoneNumber": null,
 			"callType": "VoiceCall"
 		},
@@ -22,7 +22,7 @@
 			"urlProfilePic": "https://support.hubstaff.com/wp-content/uploads/2019/08/good-pic.png",
 			"time": "November 25, 9.49 AM",
 			"count": 1,
-			"call": "Incoming",
+			"call": "MissedCall",
 			"PhoneNumber": null,
 			"callType": "VoiceCall"
 		},
@@ -31,7 +31,7 @@
 			"urlProfilePic": "https://support.hubstaff.com/wp-content/uploads/2019/08/good-pic.png",
 			"time": "november 24, 11.14 PM",
 			"count": 2,
-			"call": "Incoming",
+			"call": "MissedCall",
 			"PhoneNumber": null,
 			"callType": "VoiceCall"
 		},
@@ -40,7 +40,7 @@
 			"urlProfilePic": "https://support.hubstaff.com/wp-content/uploads/2019/08/good-pic.png",
 			"time": "November 24, 7.38PM PM",
 			"count": 2,
-			"call": "Incoming",
+			"call": "MissedCall",
 			"PhoneNumber": null,
 			"callType": "VoiceCall"
 		},
@@ -58,7 +58,7 @@
 			"urlProfilePic": "https://support.hubstaff.com/wp-content/uploads/2019/08/good-pic.png",
 			"time": "November 25, 9.01 PM",
 			"count": 1,
-			"call": "Incoming",
+			"call": "Outcoming",
 			"PhoneNumber": "+1 (302) 438-0338",
 			"callType": "VoiceCall"
 		},
