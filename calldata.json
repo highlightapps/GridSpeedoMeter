@@ -33,7 +33,7 @@
 			"count": 2,
 			"call": "incoming",
 			"PhoneNumber": null,
-			"callType": "voiceCall"
+			"callType": "VoiceCall"
 		},
 		{
 			"name": "Surekha Traning",
